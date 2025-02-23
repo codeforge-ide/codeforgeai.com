@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 export default function Home() {
@@ -15,9 +15,9 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex">
-      {/* Sidebar */}
-      <aside className="fixed left-0 h-screen w-64 bg-black/30 backdrop-blur-md border-r border-purple-900/30 overflow-y-auto">
+    <main className="flex flex-col md:flex-row">
+      {/* Sidebar - Updated with new sections */}
+      <aside className="fixed left-0 h-screen w-full md:w-64 bg-black/30 backdrop-blur-md border-r border-purple-900/30 overflow-y-auto transform transition-transform duration-200 -translate-x-full md:translate-x-0">
         <div className="p-4">
           <h3 className="text-lg font-semibold mb-4 text-purple-400">Documentation</h3>
           <nav className="space-y-2">
@@ -28,6 +28,16 @@ export default function Home() {
               <div className="pl-4 mt-2 space-y-2">
                 <a href="#installation" className="block text-sm text-gray-400 hover:text-purple-400">Installation</a>
                 <a href="#quickstart" className="block text-sm text-gray-400 hover:text-purple-400">Quick Start</a>
+              </div>
+            </details>
+            <details className="group">
+              <summary className="flex items-center cursor-pointer text-gray-300 hover:text-purple-400">
+                Usage
+              </summary>
+              <div className="pl-4 mt-2 space-y-2">
+                <a href="#cli-usage" className="block text-sm text-gray-400 hover:text-purple-400">CLI</a>
+                <a href="#ide-usage" className="block text-sm text-gray-400 hover:text-purple-400">IDE</a>
+                <a href="#api-usage" className="block text-sm text-gray-400 hover:text-purple-400">API</a>
               </div>
             </details>
             <details className="group">
@@ -44,7 +54,7 @@ export default function Home() {
       </aside>
 
       {/* Main content */}
-      <div className="ml-64 w-full">
+      <div className="w-full md:ml-64">
         <div className="breathing-bg" />
         <div className="cursor" style={{ left: mousePosition.x - 10, top: mousePosition.y - 10 }} />
         <div className="cursor-trail" style={{ left: mousePosition.x - 50, top: mousePosition.y - 50 }} />
@@ -167,6 +177,78 @@ export default function Home() {
             </div>
           </motion.div>
         </section>
+
+        {/* New Usage Sections */}
+        <section id="cli-usage" className="section">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="max-w-4xl w-full"
+          >
+            <h2 className="text-4xl font-bold mb-8">CLI Usage</h2>
+            <div className="grid gap-8 md:grid-cols-2">
+              <div className="aspect-video bg-black/30 rounded-xl overflow-hidden">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/your-video-id?controls=1&autoplay=0"
+                  title="CodeForgeAI CLI Demo"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+              <div className="space-y-4">
+                <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md">
+                  <code className="text-purple-400">$ codeforge init</code>
+                  <p className="mt-2 text-gray-300">Initialize a new CodeForge project</p>
+                </div>
+                <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md">
+                  <code className="text-purple-400">$ codeforge dev</code>
+                  <p className="mt-2 text-gray-300">Start development environment</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </section>
+
+        <section id="ide-usage" className="section">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="max-w-4xl"
+          >
+            <h2 className="text-4xl font-bold mb-8">IDE Integration</h2>
+            <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md">
+              <p className="text-gray-300">
+                CodeForgeAI seamlessly integrates with popular IDEs...
+              </p>
+            </div>
+          </motion.div>
+        </section>
+
+        <section id="api-usage" className="section">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="max-w-4xl"
+          >
+            <h2 className="text-4xl font-bold mb-8">API Reference</h2>
+            <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md">
+              <p className="text-gray-300">
+                Access CodeForgeAI's powerful features programmatically...
+              </p>
+            </div>
+          </motion.div>
+        </section>
+      </div>
+
+      {/* Sparkles overlay */}
+      <div className="sparkles-container fixed inset-0 pointer-events-none">
+        {Array.from({ length: 50 }).map((_, i) => (
+          <div key={i} className="sparkle" style={{
+            '--delay': `${Math.random() * 5}s`,
+            '--position': `${Math.random() * 100}%`,
+          } as React.CSSProperties} />
+        ))}
       </div>
     </main>
   );
