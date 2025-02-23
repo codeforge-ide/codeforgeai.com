@@ -212,11 +212,11 @@ const Home: React.FC = () => {
                 </div>
                 <div className="flex-1 bg-black/30 rounded-xl p-6 backdrop-blur-md">
                   <pre className="text-sm text-purple-400">
-                    <code>// Example of AI-generated code
+                    <code>{`// Example of AI-generated code
 function generateSmartContract(description) {
   // AI processing
   return optimizedCode;
-}</code>
+}`}</code>
                   </pre>
                 </div>
               </div>
@@ -224,11 +224,11 @@ function generateSmartContract(description) {
               <div className="flex flex-col md:flex-row gap-8 items-center">
                 <div className="flex-1 order-2 md:order-1 bg-black/30 rounded-xl p-6 backdrop-blur-md">
                   <pre className="text-sm text-purple-400">
-                    <code>// Security analysis in action
+                    <code>{`// Security analysis in action
 async function auditContract(code) {
   const vulnerabilities = await AI.analyze(code);
   return securityReport;
-}</code>
+}`}</code>
                   </pre>
                 </div>
                 <div className="flex-1 order-1 md:order-2">
