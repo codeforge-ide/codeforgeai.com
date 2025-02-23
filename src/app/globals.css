@@ -128,9 +128,42 @@ details[open] > summary::after {
   transform: rotate(45deg);
 }
 
+/* Add styling for showcase items */
+.showcase-item {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.showcase-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
+}
+
+/* Features section styling */
+.showcase-item {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(138, 43, 226, 0.1);
+}
+
+.showcase-item:hover {
+  transform: translateY(-4px);
+  border-color: rgba(138, 43, 226, 0.3);
+  box-shadow: 0 4px 20px rgba(138, 43, 226, 0.2);
+}
+
+pre code {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+  background: transparent;
+  border-radius: 0.5rem;
+}
+
 /* Add responsive design */
 @media (max-width: 768px) {
   .section {
     padding: 1rem;
+  }
+  .showcase-item {
+    margin-bottom: 1rem;
   }
 }

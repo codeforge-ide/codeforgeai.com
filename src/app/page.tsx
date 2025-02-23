@@ -116,6 +116,34 @@ export default function Home() {
           </motion.div>
         </section>
 
+        <section id="showcase" className="section">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          >
+            <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md showcase-item">
+              <h3 className="text-2xl font-bold mb-4">Smart Contract Generation</h3>
+              <p className="text-gray-300">Generate optimized smart contracts from natural language descriptions using advanced AI, making blockchain development accessible to everyone.</p>
+            </div>
+
+            <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md showcase-item">
+              <h3 className="text-2xl font-bold mb-4">Agent Marketplace</h3>
+              <p className="text-gray-300">Discover, share, and deploy autonomous agents in a community-driven marketplace. Accelerate development with pre-built solutions.</p>
+            </div>
+
+            <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md showcase-item">
+              <h3 className="text-2xl font-bold mb-4">Interactive Learning</h3>
+              <p className="text-gray-300">AI-powered personalized tutorials and real-time assistance to help you master blockchain development and DeFi concepts.</p>
+            </div>
+
+            <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md showcase-item">
+              <h3 className="text-2xl font-bold mb-4">Security Analysis</h3>
+              <p className="text-gray-300">Built-in AI security auditing tools to identify vulnerabilities and suggest fixes, ensuring robust and secure smart contracts.</p>
+            </div>
+          </motion.div>
+        </section>
+
         <section id="contact" className="section">
           <motion.div
             initial={{ opacity: 0 }}
@@ -164,6 +192,50 @@ export default function Home() {
             <h2 className="text-4xl font-bold mb-8">Quick Start</h2>
             <div className="prose prose-invert max-w-none">
               <p className="text-gray-300">Get started with CodeForgeAI in minutes...</p>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Features Section */}
+        <section id="features" className="section">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="max-w-4xl w-full"
+          >
+            <h2 className="text-4xl font-bold mb-12 text-center">Advanced Features</h2>
+            <div className="space-y-16">
+              <div className="flex flex-col md:flex-row gap-8 items-center">
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold mb-4">AI-Powered Development</h3>
+                  <p className="text-gray-300">Transform natural language descriptions into production-ready code. Our AI understands your intent and generates optimized solutions that follow best practices.</p>
+                </div>
+                <div className="flex-1 bg-black/30 rounded-xl p-6 backdrop-blur-md">
+                  <pre className="text-sm text-purple-400">
+                    <code>// Example of AI-generated code
+function generateSmartContract(description) {
+  // AI processing
+  return optimizedCode;
+}</code>
+                  </pre>
+                </div>
+              </div>
+
+              <div className="flex flex-col md:flex-row gap-8 items-center">
+                <div className="flex-1 order-2 md:order-1 bg-black/30 rounded-xl p-6 backdrop-blur-md">
+                  <pre className="text-sm text-purple-400">
+                    <code>// Security analysis in action
+async function auditContract(code) {
+  const vulnerabilities = await AI.analyze(code);
+  return securityReport;
+}</code>
+                  </pre>
+                </div>
+                <div className="flex-1 order-1 md:order-2">
+                  <h3 className="text-2xl font-bold mb-4">Intelligent Security</h3>
+                  <p className="text-gray-300">Continuous security analysis powered by AI helps you identify and fix vulnerabilities before they become problems.</p>
+                </div>
+              </div>
             </div>
           </motion.div>
         </section>
