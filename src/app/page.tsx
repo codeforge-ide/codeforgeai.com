@@ -1,9 +1,10 @@
 'use client';
 
+import React from 'react';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
-export default function Home() {
+const Home: React.FC = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -120,8 +121,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
-          >
+            className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md showcase-item">
               <h3 className="text-2xl font-bold mb-4">Smart Contract Generation</h3>
               <p className="text-gray-300">Generate optimized smart contracts from natural language descriptions using advanced AI, making blockchain development accessible to everyone.</p>
@@ -243,3 +243,5 @@ async function auditContract(code) {
     </main>
   );
 }
+
+export default Home;
