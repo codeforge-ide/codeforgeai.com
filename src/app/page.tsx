@@ -38,6 +38,20 @@ const Home: React.FC = () => {
               <div className="pl-4 mt-2 space-y-2">
                 <a href="#ai-completion" className="block text-sm text-gray-400 hover:text-purple-400">AI Completion</a>
                 <a href="#code-analysis" className="block text-sm text-gray-400 hover:text-purple-400">Code Analysis</a>
+                <a href="#decentralized" className="block text-sm text-gray-400 hover:text-purple-400">Decentralized Infrastructure</a>
+              </div>
+            </details>
+            <details className="group">
+              <summary className="flex items-center cursor-pointer text-gray-300 hover:text-purple-400">
+                Tooling
+              </summary>
+              <div className="pl-4 mt-2 space-y-2">
+                <a href="#decengit" className="block text-sm text-gray-400 hover:text-purple-400 relative">
+                  DecenGit
+                  <span className="absolute -right-2 -top-2 px-2 py-1 text-xs bg-purple-600 rounded-full">Coming Soon</span>
+                </a>
+                <a href="#smart-contracts" className="block text-sm text-gray-400 hover:text-purple-400">Smart Contracts</a>
+                <a href="#ai-agents" className="block text-sm text-gray-400 hover:text-purple-400">AI Agents</a>
               </div>
             </details>
           </nav>
@@ -78,14 +92,26 @@ const Home: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center"
+            className="text-center max-w-4xl"
           >
             <h1 className="text-6xl font-bold bg-gradient-to-r from-purple-500 to-green-400 bg-clip-text text-transparent">
               CodeForgeAI
             </h1>
             <p className="mt-4 text-xl text-gray-300">
-              The Next Generation AI-Powered IDE
+              The First Decentralized AI-Powered Developer Ecosystem
             </p>
+            <p className="mt-6 text-lg text-gray-400">
+              Combining blockchain technology, artificial intelligence, and collaborative development
+              to create the future of coding.
+            </p>
+            <div className="mt-8 flex gap-4 justify-center">
+              <button className="px-8 py-3 bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors">
+                Get Started
+              </button>
+              <button className="px-8 py-3 border border-purple-600 rounded-lg hover:bg-purple-600/20 transition-colors">
+                View Demo
+              </button>
+            </div>
           </motion.div>
         </section>
 
@@ -205,6 +231,37 @@ const Home: React.FC = () => {
           </motion.div>
         </section>
 
+        <section id="decengit" className="section">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="max-w-4xl"
+          >
+            <div className="bg-gradient-to-r from-purple-900/30 to-green-900/30 p-8 rounded-2xl backdrop-blur-md">
+              <h2 className="text-4xl font-bold mb-6">DecenGit: The Future of Version Control</h2>
+              <p className="text-xl text-gray-300 mb-6">
+                A revolutionary decentralized alternative to traditional Git, powered by blockchain technology
+                and enhanced with AI capabilities.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="bg-black/30 p-6 rounded-xl">
+                  <h3 className="text-xl font-semibold mb-3 text-purple-400">Decentralized Storage</h3>
+                  <p className="text-gray-300">Your code lives on the blockchain, ensuring permanent availability and true ownership</p>
+                </div>
+                <div className="bg-black/30 p-6 rounded-xl">
+                  <h3 className="text-xl font-semibold mb-3 text-purple-400">AI-Powered Merging</h3>
+                  <p className="text-gray-300">Smart conflict resolution and automated code review suggestions</p>
+                </div>
+              </div>
+              <div className="mt-6 text-center">
+                <button className="px-6 py-3 bg-purple-600/30 rounded-lg hover:bg-purple-600/50 transition-colors">
+                  Join the Waitlist
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </section>
+
         {/* Features Section */}
         <section id="features" className="section">
           <motion.div
@@ -212,38 +269,39 @@ const Home: React.FC = () => {
             whileInView={{ opacity: 1 }}
             className="max-w-4xl w-full"
           >
-            <h2 className="text-4xl font-bold mb-12 text-center">Advanced Features</h2>
-            <div className="space-y-16">
-              <div className="flex flex-col md:flex-row gap-8 items-center">
-                <div className="flex-1">
-                  <h3 className="text-2xl font-bold mb-4">AI-Powered Development</h3>
-                  <p className="text-gray-300">Transform natural language descriptions into production-ready code. Our AI understands your intent and generates optimized solutions that follow best practices.</p>
-                </div>
-                <div className="flex-1 bg-black/30 rounded-xl p-6 backdrop-blur-md">
-                  <pre className="text-sm text-purple-400">
-                    <code>{`// Example of AI-generated code
-function generateSmartContract(description) {
-  // AI processing
-  return optimizedCode;
-}`}</code>
-                  </pre>
-                </div>
+            <h2 className="text-4xl font-bold mb-12 text-center">Ecosystem Features</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md border border-purple-900/30">
+                <h3 className="text-2xl font-bold mb-4 text-purple-400">Decentralized Infrastructure</h3>
+                <ul className="space-y-3 text-gray-300">
+                  <li>• Blockchain-based code storage and version control</li>
+                  <li>• Distributed computing resources</li>
+                  <li>• Smart contract-powered collaboration</li>
+                </ul>
               </div>
-
-              <div className="flex flex-col md:flex-row gap-8 items-center">
-                <div className="flex-1 order-2 md:order-1 bg-black/30 rounded-xl p-6 backdrop-blur-md">
-                  <pre className="text-sm text-purple-400">
-                    <code>{`// Security analysis in action
-async function auditContract(code) {
-  const vulnerabilities = await AI.analyze(code);
-  return securityReport;
-}`}</code>
-                  </pre>
-                </div>
-                <div className="flex-1 order-1 md:order-2">
-                  <h3 className="text-2xl font-bold mb-4">Intelligent Security</h3>
-                  <p className="text-gray-300">Continuous security analysis powered by AI helps you identify and fix vulnerabilities before they become problems.</p>
-                </div>
+              <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md border border-purple-900/30">
+                <h3 className="text-2xl font-bold mb-4 text-purple-400">AI Integration</h3>
+                <ul className="space-y-3 text-gray-300">
+                  <li>• Advanced code completion and generation</li>
+                  <li>• Automated code review and optimization</li>
+                  <li>• Natural language to code translation</li>
+                </ul>
+              </div>
+              <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md border border-purple-900/30">
+                <h3 className="text-2xl font-bold mb-4 text-purple-400">Developer Tools</h3>
+                <ul className="space-y-3 text-gray-300">
+                  <li>• Integrated development environment</li>
+                  <li>• Smart contract development suite</li>
+                  <li>• Cross-chain deployment tools</li>
+                </ul>
+              </div>
+              <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md border border-purple-900/30">
+                <h3 className="text-2xl font-bold mb-4 text-purple-400">Community Features</h3>
+                <ul className="space-y-3 text-gray-300">
+                  <li>• Decentralized governance</li>
+                  <li>• Token-based incentives</li>
+                  <li>• Collaborative project spaces</li>
+                </ul>
               </div>
             </div>
           </motion.div>
