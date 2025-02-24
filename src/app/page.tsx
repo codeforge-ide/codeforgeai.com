@@ -193,6 +193,15 @@ const Home: React.FC = () => {
             <div className="prose prose-invert max-w-none">
               <p className="text-gray-300">Get started with CodeForgeAI in minutes...</p>
             </div>
+            {/* Screenshot section */}
+            <div className="mt-8">
+              <h3 className="text-2xl font-bold mb-4">CLI Screenshot</h3>
+              <img 
+                src="https://github.com/whisperrnote/whisperrcloud/blob/f7045d315e914ad32856d314c736cb430cee8819/images/codeforge-ide/codeforgeai.com/Screenshot%20from%202025-02-04%2016-58-36.png?raw=true" 
+                alt="CLI Screenshot" 
+                className="rounded-lg shadow-lg"
+              />
+            </div>
           </motion.div>
         </section>
 
