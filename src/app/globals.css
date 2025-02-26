@@ -7,6 +7,8 @@
   --secondary: #00FF7F;
   --background: #0a0a0a;
   --text: #ffffff;
+  --card-shadow: 0 10px 30px -10px rgba(138, 43, 226, 0.3);
+  --hover-shadow: 0 14px 28px rgba(138, 43, 226, 0.25), 0 10px 10px rgba(0, 255, 127, 0.22);
 }
 
 * {
@@ -20,8 +22,10 @@ body {
   background: var(--background);
   color: var(--text);
   overflow-x: hidden;
+  font-feature-settings: "rlig" 1, "calt" 1;
 }
 
+/* Enhanced cursor styles */
 .cursor {
   width: 20px;
   height: 20px;
@@ -30,9 +34,17 @@ body {
   position: fixed;
   pointer-events: none;
   z-index: 999;
+  transition: width 0.3s, height 0.3s, background 0.3s;
 }
 
-/* Update cursor-trail with animated color waves */
+.cursor.active {
+  width: 40px;
+  height: 40px;
+  background: rgba(138,43,226,0.1);
+  mix-blend-mode: difference;
+}
+
+/* Enhanced cursor-trail with animated color waves */
 .cursor-trail {
   width: 100px;
   height: 100px;
@@ -41,6 +53,7 @@ body {
   pointer-events: none;
   z-index: 998;
   animation: wave 2s linear infinite;
+  filter: blur(10px);
 }
 
 /* Updated jellyfish-like animated background */
@@ -52,6 +65,265 @@ body {
   height: 100vh;
   z-index: -1;
   animation: jellyfishBg 30s linear infinite;
+}
+
+/* Floating particles background effect */
+.floating-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.floating-particles::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(138,43,226,0.05) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(0,255,127,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: floatingParticles 20s linear infinite;
+}
+
+@keyframes floatingParticles {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+/* Parallax stars effect */
+.parallax-stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 1px, transparent 1px),
+    radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 20px 20px, 40px 40px, 30px 30px;
+}
+
+/* Material UI-inspired card reflection effect */
+.card-reflection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0) 30%,
+    rgba(255,255,255,0.05) 48%,
+    rgba(255,255,255,0) 52%
+  );
+  transform: translateX(-100%);
+  animation: reflectionPass 8s ease-in-out infinite;
+}
+
+@keyframes reflectionPass {
+  0% { transform: translateX(-100%); }
+  20%, 100% { transform: translateX(100%); }
+}
+
+/* Enhanced glow effect for cards */
+.glow-effect {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(138, 43, 226, 0.3),
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.showcase-item:hover .glow-effect {
+  opacity: 0.5;
+  animation: pulsateGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulsateGlow {
+  0% { opacity: 0.3; transform: scale(0.95); }
+  50% { opacity: 0.5; transform: scale(1); }
+  100% { opacity: 0.3; transform: scale(0.95); }
+}
+
+/* Hero section specific styling */
+.hero-section {
+  position: relative;
+}
+
+.hero-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle at center,
+    rgba(138, 43, 226, 0.3) 0%,
+    rgba(0, 255, 127, 0.1) 40%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  border-radius: 50%;
+  z-index: -1;
+  animation: heroGlowPulse 8s ease-in-out infinite;
+}
+
+@keyframes heroGlowPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+  50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.5; }
+}
+
+/* Text shadow for better readability */
+.text-shadow {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Enhanced typing effect for hero title */
+.hero-title {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  animation: revealText 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+@keyframes revealText {
+  0% { transform: translateY(100%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Material design-inspired floating code blocks */
+.floating-code-block {
+  position: absolute;
+  width: 200px;
+  height: 140px;
+  background-color: rgba(20, 20, 20, 0.6);
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+  border-left: 3px solid var(--primary);
+  box-shadow: var(--card-shadow);
+  z-index: 1;
+  opacity: 0.6;
+  animation: float 10s ease-in-out infinite;
+}
+
+.floating-code-block::before {
+  content: '';
+  position: absolute;
+  width: 80%;
+  height: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  top: 20px;
+  left: 20px;
+}
+
+.floating-code-block::after {
+  content: '';
+  position: absolute;
+  width: 60%;
+  height: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  top: 40px;
+  left: 20px;
+}
+
+.floating-code-block:nth-child(odd) {
+  animation-delay: -5s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(1deg); }
+}
+
+/* DecenGit section special glow effect */
+.decengit-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at bottom right,
+    rgba(138, 43, 226, 0.2),
+    transparent 70%
+  );
+  z-index: -1;
+  border-radius: inherit;
+  filter: blur(20px);
+}
+
+/* Terminal styling for code examples */
+.terminal-window {
+  background-color: #1E1E1E;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.terminal-header {
+  padding: 10px;
+  background-color: #333;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.terminal-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.terminal-button.red { background-color: #FF5F56; }
+.terminal-button.yellow { background-color: #FFBD2E; }
+.terminal-button.green { background-color: #27C93F; }
+
+.terminal-body {
+  padding: 16px;
+  font-family: monospace;
+  line-height: 1.6;
+}
+
+/* Enhanced sidebar animation */
+.sidebar-animation {
+  animation: slideInLeft 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideInLeft {
+  0% { transform: translateX(-100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Keyframes for cursor trail color wave effect */
+@keyframes wave {
+  0% { background: radial-gradient(circle, rgba(138,43,226,0.2) 0%, rgba(0,255,127,0) 70%); }
+  50% { background: radial-gradient(circle, rgba(0,255,127,0.2) 0%, rgba(138,43,226,0) 70%); }
+  100% { background: radial-gradient(circle, rgba(138,43,226,0.2) 0%, rgba(0,255,127,0) 70%); }
+}
+
+/* Pulsating notification badge */
+.pulsate-badge {
+  animation: pulsate 1.5s infinite;
+}
+
+@keyframes pulsate {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes jellyfishBg {
@@ -92,11 +364,51 @@ body {
   }
 }
 
-/* Keyframes for cursor trail color wave effect */
-@keyframes wave {
-  0% { background: radial-gradient(circle, rgba(138,43,226,0.2) 0%, rgba(0,255,127,0) 70%); }
-  50% { background: radial-gradient(circle, rgba(0,255,127,0.2) 0%, rgba(138,43,226,0) 70%); }
-  100% { background: radial-gradient(circle, rgba(138,43,226,0.2) 0%, rgba(0,255,127,0) 70%); }
+/* Material design elevation */
+.elevation-1 {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.elevation-2 {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.elevation-3 {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.elevation-4 {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.elevation-5 {
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+/* Image overlay with gradient effect */
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, transparent 50%, rgba(10,10,10,0.8) 100%);
+}
+
+/* Enhanced form styling */
+.form-floating {
+  position: relative;
+}
+
+.form-floating label {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  font-size: 0.875rem;
+  padding: 0 4px;
+  background-color: var(--background);
+  color: var(--primary);
+  transition: all 0.2s;
 }
 
 .section {
