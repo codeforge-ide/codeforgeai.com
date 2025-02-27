@@ -1,24 +1,70 @@
 'use client';
 
 import React from 'react';
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useState, useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { FeatureCard, GlassCard, RevealText, ParallaxCard } from '../components/cards';
 
 const Home: React.FC = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const { scrollYProgress } = useScroll();
+  const mainRef = useRef<HTMLDivElement>(null);
+
+  // Smooth scroll progress animation
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  // Parallax effects for hero section
+  const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+
+  // Section refs for scroll animations
+  const [heroRef, heroInView] = useInView({ threshold: 0.3, triggerOnce: true });
+  const [featuresRef, featuresInView] = useInView({ threshold: 0.2, triggerOnce: true });
+  const [showcaseRef, showcaseInView] = useInView({ threshold: 0.1, triggerOnce: true });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
+      
+      // Add glow effect to cards on hover
+      const cards = document.querySelectorAll('.card-glow');
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        (card as HTMLElement).style.setProperty('--mouse-x', `${x}px`);
+        (card as HTMLElement).style.setProperty('--mouse-y', `${y}px`);
+      });
     };
+
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // Add scroll progress indicator
+  const progressBar = (
+    <motion.div
+      className="fixed top-0 left-0 right-0 h-1 bg-purple-600 origin-left z-50"
+      style={{ scaleX }}
+    />
+  );
+
   return (
-    <main className="flex">
-      {/* Sidebar */}
-      <aside className="fixed left-0 h-screen w-64 bg-black/30 backdrop-blur-md border-r border-purple-900/30 overflow-y-auto">
+    <main ref={mainRef} className="flex">
+      {progressBar}
+      
+      {/* Sidebar with enhanced animations */}
+      <motion.aside
+        initial={{ x: -100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.5, type: "spring" }}
+        className="fixed left-0 h-screen w-64 bg-black/30 backdrop-blur-md border-r border-purple-900/30 overflow-y-auto sidebar-animation"
+      >
         <div className="p-4">
           <h3 className="text-lg font-semibold mb-4 text-purple-400">Documentation</h3>
           <nav className="space-y-2">
@@ -56,15 +102,118 @@ const Home: React.FC = () => {
             </details>
           </nav>
         </div>
-      </aside>
+      </motion.aside>
 
-      {/* Main content */}
       <div className="ml-64 w-full">
         <div className="breathing-bg" />
         <div className="cursor" style={{ left: mousePosition.x - 10, top: mousePosition.y - 10 }} />
         <div className="cursor-trail" style={{ left: mousePosition.x - 50, top: mousePosition.y - 50 }} />
 
-        {/* Updated navigation */}
+        {/* Enhanced hero section */}
+        <motion.section
+          ref={heroRef}
+          style={{ y: heroY, opacity: heroOpacity }}
+          className="section min-h-screen flex items-center justify-center relative overflow-hidden"
+        >
+          <div className="hero-glow" />
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={heroInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-center max-w-4xl relative z-10"
+          >
+            <h1 className="text-6xl font-bold bg-gradient-to-r from-purple-500 to-green-400 bg-clip-text text-transparent">
+              CodeForgeAI
+            </h1>
+            <p className="mt-4 text-xl text-gray-300">
+              The First Decentralized AI-Powered Developer Ecosystem
+            </p>
+            <p className="mt-6 text-lg text-gray-400">
+              Combining blockchain technology, artificial intelligence, and collaborative development
+              to create the future of coding.
+            </p>
+            <div className="mt-8 flex gap-4 justify-center">
+              <button className="px-8 py-3 bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors">
+                Get Started
+              </button>
+              <button className="px-8 py-3 border border-purple-600 rounded-lg hover:bg-purple-600/20 transition-colors">
+                View Demo
+              </button>
+            </div>
+          </motion.div>
+        </motion.section>
+
+        {/* Features section with material cards */}
+        <motion.section
+          ref={featuresRef}
+          initial={{ opacity: 0 }}
+          animate={featuresInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6 }}
+          className="section relative"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            <FeatureCard
+              title="AI Code Completion"
+              description="Advanced code suggestions powered by AI"
+              delay={0.2}
+            />
+            <FeatureCard
+              title="Smart Contract Generation"
+              description="Generate optimized smart contracts from natural language"
+              delay={0.4}
+            />
+            <FeatureCard
+              title="Decentralized Infrastructure"
+              description="Built on blockchain technology for true ownership"
+              delay={0.6}
+            />
+          </div>
+        </motion.section>
+
+        {/* Showcase section with parallax cards */}
+        <motion.section
+          ref={showcaseRef}
+          initial={{ opacity: 0 }}
+          animate={showcaseInView ? { opacity: 1 } : {}}
+          className="section relative"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <ParallaxCard depth={20} className="showcase-item card-glow">
+              <h3 className="text-2xl font-bold mb-4 text-purple-400">Interactive Learning</h3>
+              <p className="text-gray-300">AI-powered personalized tutorials and real-time assistance</p>
+            </ParallaxCard>
+            <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md showcase-item">
+              <h3 className="text-2xl font-bold mb-4">Smart Contract Generation</h3>
+              <p className="text-gray-300">Generate optimized smart contracts from natural language descriptions using advanced AI, making blockchain development accessible to everyone.</p>
+            </div>
+
+            <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md showcase-item">
+              <h3 className="text-2xl font-bold mb-4">Agent Marketplace</h3>
+              <p className="text-gray-300">Discover, share, and deploy autonomous agents in a community-driven marketplace. Accelerate development with pre-built solutions.</p>
+            </div>
+
+            <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md showcase-item">
+              <h3 className="text-2xl font-bold mb-4">Interactive Learning</h3>
+              <p className="text-gray-300">AI-powered personalized tutorials and real-time assistance to help you master blockchain development and DeFi concepts.</p>
+            </div>
+
+            <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md showcase-item">
+              <h3 className="text-2xl font-bold mb-4">Security Analysis</h3>
+              <p className="text-gray-300">Built-in AI security auditing tools to identify vulnerabilities and suggest fixes, ensuring robust and secure smart contracts.</p>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Add scroll indicator */}
+        <div className="scroll-motion-indicator">
+          {['hero', 'features', 'showcase', 'contact'].map((section, index) => (
+            <div
+              key={section}
+              className={`scroll-dot ${scrollYProgress.get() > index * 0.25 ? 'active' : ''}`}
+            />
+          ))}
+        </div>
+
         <nav className="fixed top-0 right-0 left-64 bg-black/50 backdrop-blur-md z-50 p-4">
           <div className="flex justify-between items-center">
             <ul className="flex gap-8">
@@ -87,7 +236,6 @@ const Home: React.FC = () => {
           </div>
         </nav>
 
-        {/* Existing sections with updated margins */}
         <section id="home" className="section">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
