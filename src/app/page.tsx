@@ -343,20 +343,194 @@ const Home: React.FC = () => {
           </motion.div>
         </section>
 
-        {/* New Documentation Sections */}
+        {/* Enhanced Installation Section */}
         <section id="installation" className="section">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="max-w-3xl"
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl w-full"
           >
-            <h2 className="text-4xl font-bold mb-8">Installation</h2>
-            <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md">
-              <code className="text-purple-400">npm install codeforgeai</code>
-            </div>
+            <RevealText>
+              <h2 className="text-4xl font-bold mb-8 text-center">Installation</h2>
+            </RevealText>
+            
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 gap-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              {/* CLI Tool Installation */}
+              <GlassCard className="h-full">
+                <h3 className="text-2xl font-bold mb-4 text-purple-400">CLI Tool</h3>
+                <p className="mb-4 text-gray-300">Install the CodeForgeAI CLI tool directly from GitHub:</p>
+                
+                <div className="terminal-window mb-4">
+                  <div className="terminal-header">
+                    <span className="terminal-button red"></span>
+                    <span className="terminal-button yellow"></span>
+                    <span className="terminal-button green"></span>
+                  </div>
+                  <div className="terminal-body bg-black/60 font-mono text-sm">
+                    <div className="flex">
+                      <span className="text-green-500 mr-2">$</span>
+                      <span className="text-white">gh repo clone codeforge-ide/codeforgeai</span>
+                    </div>
+                    <div className="flex">
+                      <span className="text-green-500 mr-2">$</span>
+                      <span className="text-white">cd codeforgeai</span>
+                    </div>
+                    <div className="flex">
+                      <span className="text-green-500 mr-2">$</span>
+                      <span className="text-white">pip install -e .</span>
+                    </div>
+                    <div className="mt-2 text-gray-400">Installing dependencies...</div>
+                    <div className="text-green-400">Successfully installed CodeForgeAI CLI</div>
+                  </div>
+                </div>
+
+                <p className="text-gray-400 text-sm mt-2">After installation, run <code className="bg-black/30 px-2 py-1 rounded">codeforge --help</code> to see available commands.</p>
+              </GlassCard>
+
+              {/* GUI Application */}
+              <GlassCard className="h-full">
+                <h3 className="text-2xl font-bold mb-4 text-purple-400">Desktop Application</h3>
+                <p className="mb-4 text-gray-300">Choose your preferred installation method:</p>
+                
+                <h4 className="text-lg font-semibold mb-2 text-white">Option 1: Download Releases</h4>
+                <p className="mb-4 text-gray-300">Get pre-built binaries for your platform:</p>
+                <a 
+                  href="https://github.com/codeforge-ide/codeforge/releases" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-purple-600/30 rounded-lg hover:bg-purple-600/50 transition-colors w-fit mb-6"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                  </svg>
+                  <span>Download Latest Release</span>
+                </a>
+                
+                <h4 className="text-lg font-semibold mb-2 text-white">Option 2: Build from Source</h4>
+                <div className="terminal-window">
+                  <div className="terminal-header">
+                    <span className="terminal-button red"></span>
+                    <span className="terminal-button yellow"></span>
+                    <span className="terminal-button green"></span>
+                  </div>
+                  <div className="terminal-body bg-black/60 font-mono text-sm">
+                    <div className="flex">
+                      <span className="text-green-500 mr-2">$</span>
+                      <span className="text-white">git clone https://github.com/codeforge-ide/codeforge.git</span>
+                    </div>
+                    <div className="flex">
+                      <span className="text-green-500 mr-2">$</span>
+                      <span className="text-white">cd codeforge</span>
+                    </div>
+                    <div className="flex">
+                      <span className="text-green-500 mr-2">$</span>
+                      <span className="text-white">flutter pub get</span>
+                    </div>
+                    <div className="flex">
+                      <span className="text-green-500 mr-2">$</span>
+                      <span className="text-white">flutter build &lt;platform&gt;</span>
+                    </div>
+                    <div className="text-gray-400 mt-1">Where &lt;platform&gt; is one of: linux, macos, windows</div>
+                  </div>
+                </div>
+              </GlassCard>
+            </motion.div>
+
+            {/* System Requirements */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="mt-8"
+            >
+              <GlassCard>
+                <h3 className="text-xl font-bold mb-4 text-purple-400">System Requirements</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <h4 className="font-bold text-white mb-2">Minimum</h4>
+                    <ul className="space-y-1 text-gray-300 text-sm">
+                      <li>• 4GB RAM</li>
+                      <li>• 2 CPU cores</li>
+                      <li>• 1GB storage</li>
+                      <li>• Python 3.8+</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-white mb-2">Recommended</h4>
+                    <ul className="space-y-1 text-gray-300 text-sm">
+                      <li>• 8GB+ RAM</li>
+                      <li>• 4+ CPU cores</li>
+                      <li>• GPU with 4GB+ VRAM</li>
+                      <li>• 5GB+ storage</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-white mb-2">For Local AI</h4>
+                    <ul className="space-y-1 text-gray-300 text-sm">
+                      <li>• 16GB+ RAM</li>
+                      <li>• 8+ CPU cores</li>
+                      <li>• NVIDIA GPU (8GB+ VRAM)</li>
+                      <li>• 20GB+ storage</li>
+                    </ul>
+                  </div>
+                </div>
+              </GlassCard>
+            </motion.div>
+
+            {/* Installation Verification */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="mt-8"
+            >
+              <GlassCard>
+                <h3 className="text-xl font-bold mb-4 text-purple-400">Verifying Installation</h3>
+                <p className="mb-4 text-gray-300">After installation, run the following command to verify that CodeForgeAI was installed correctly:</p>
+                <div className="terminal-window">
+                  <div className="terminal-header">
+                    <span className="terminal-button red"></span>
+                    <span className="terminal-button yellow"></span>
+                    <span className="terminal-button green"></span>
+                  </div>
+                  <div className="terminal-body bg-black/60 font-mono text-sm">
+                    <div className="flex">
+                      <span className="text-green-500 mr-2">$</span>
+                      <span className="text-white">codeforge --version</span>
+                    </div>
+                    <div className="text-white">CodeForgeAI v1.2.0</div>
+                  </div>
+                </div>
+              </GlassCard>
+            </motion.div>
+
+            {/* Troubleshooting */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+              className="mt-8"
+            >
+              <GlassCard>
+                <h3 className="text-xl font-bold mb-2 text-purple-400">Troubleshooting</h3>
+                <p className="text-gray-300 mb-4">Encountering issues during installation? Check our troubleshooting guide or ask the community for help.</p>
+                <div className="flex flex-wrap gap-4">
+                  <a href="#docs" className="px-4 py-2 bg-black/30 rounded-lg hover:bg-black/50 transition-colors">View Documentation</a>
+                  <a href="#community" className="px-4 py-2 bg-black/30 rounded-lg hover:bg-black/50 transition-colors">Join Discord</a>
+                  <a href="#github" className="px-4 py-2 bg-black/30 rounded-lg hover:bg-black/50 transition-colors">Open an Issue</a>
+                </div>
+              </GlassCard>
+            </motion.div>
           </motion.div>
         </section>
 
+        {/* New Documentation Sections */}
         <section id="quickstart" className="section">
           <motion.div
             initial={{ opacity: 0 }}
