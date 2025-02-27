@@ -186,32 +186,6 @@ const Home: React.FC = () => {
                 View Demo
               </button>
             </motion.div>
-
-            {/* Floating code blocks for visual effect */}
-            <motion.div
-              animate={{
-                y: [0, -10, 0],
-                rotate: [0, 2, 0]
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              className="floating-code-block absolute left-[10%] top-[20%]"
-            />
-            <motion.div
-              animate={{
-                y: [0, 10, 0],
-                rotate: [0, -2, 0]
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              className="floating-code-block absolute right-[15%] bottom-[25%]"
-            />
           </motion.div>
 
           {/* Scroll indicator */}
