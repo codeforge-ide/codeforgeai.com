@@ -130,6 +130,101 @@ const Home: React.FC = () => {
         <div className="cursor" style={{ left: mousePosition.x - 10, top: mousePosition.y - 10 }} />
         <div className="cursor-trail" style={{ left: mousePosition.x - 50, top: mousePosition.y - 50 }} />
 
+        {/* Hero Section */}
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="absolute inset-0 z-0"
+          >
+            <div className="hero-glow" />
+            <div className="parallax-stars" />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative z-10 max-w-4xl mx-auto text-center px-4"
+          >
+            <h1 className="text-7xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-purple-400 via-purple-600 to-green-400 bg-clip-text text-transparent">
+                CodeForgeAI
+              </span>
+            </h1>
+            
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="text-2xl text-gray-300 mb-8 leading-relaxed"
+            >
+              The First Decentralized AI-Powered Developer Ecosystem
+            </motion.p>
+            
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="text-lg text-gray-400 mb-12 max-w-2xl mx-auto"
+            >
+              Combining blockchain technology, artificial intelligence, and collaborative development
+              to create the future of coding.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="flex gap-6 justify-center"
+            >
+              <button className="px-8 py-3 bg-purple-600 rounded-lg hover:bg-purple-700 transition-all transform hover:scale-105 elevation-3">
+                Get Started
+              </button>
+              <button className="px-8 py-3 border border-purple-600 rounded-lg hover:bg-purple-600/20 transition-all transform hover:scale-105">
+                View Demo
+              </button>
+            </motion.div>
+
+            {/* Floating code blocks for visual effect */}
+            <motion.div
+              animate={{
+                y: [0, -10, 0],
+                rotate: [0, 2, 0]
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="floating-code-block absolute left-[10%] top-[20%]"
+            />
+            <motion.div
+              animate={{
+                y: [0, 10, 0],
+                rotate: [0, -2, 0]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="floating-code-block absolute right-[15%] bottom-[25%]"
+            />
+          </motion.div>
+
+          {/* Scroll indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2 }}
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          >
+            <div className="scroll-indicator" />
+          </motion.div>
+        </section>
+
         {/* Installation Section */}
         <section id="installation" className="section">
           <motion.div
