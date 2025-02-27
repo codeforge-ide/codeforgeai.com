@@ -472,7 +472,7 @@ const Home: React.FC = () => {
               Become a part of the CodeForgeAI community and collaborate with developers from around the world.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a href="#discord" className="px-4 py-2 bg-purple-600/30 rounded-lg hover:bg-purple-600/50 transition-colors">Discord</a>
+              <a href="#discord" className="px-4 py-2 bg-purple-600/30 rounded-lg hover:bg-purple-600/50 transition-colors">Join Discord</a>
               <a href="#github" className="px-4 py-2 bg-purple-600/30 rounded-lg hover:bg-purple-600/50 transition-colors">GitHub</a>
               <a href="#forum" className="px-4 py-2 bg-purple-600/30 rounded-lg hover:bg-purple-600/50 transition-colors">Twitter</a>
             </div>
