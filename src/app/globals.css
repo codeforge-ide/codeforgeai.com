@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   --primary: #8A2BE2;
@@ -99,38 +97,70 @@ body {
   100% { background: radial-gradient(circle, rgba(138,43,226,0.2) 0%, rgba(0,255,127,0) 70%); }
 }
 
+/* Fix section padding and spacing */
 .section {
   min-height: 100vh;
-  padding: 2rem;
+  padding: 4rem 2rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   position: relative;
 }
 
-/* Add styles for documentation sidebar */
+/* Improve documentation sidebar styling */
+details {
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
 details > summary {
-  list-style: none;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
 }
 
-details > summary::marker,
-details > summary::-webkit-details-marker {
-  display: none;
+details > summary:hover {
+  background: rgba(138, 43, 226, 0.1);
 }
 
-details > summary::after {
-  content: '+';
-  margin-left: auto;
-  transition: transform 0.2s;
+details[open] {
+  background: rgba(0, 0, 0, 0.2);
+  margin-bottom: 0.5rem;
 }
 
-details[open] > summary::after {
-  transform: rotate(45deg);
+details[open] > summary {
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(138, 43, 226, 0.2);
 }
 
-/* Add responsive design */
+/* Add smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+/* Improve code block styling */
+code {
+  font-family: var(--font-jetbrains);
+  font-size: 0.9em;
+}
+
+/* Responsive improvements */
 @media (max-width: 768px) {
   .section {
-    padding: 1rem;
+    padding: 3rem 1rem;
+  }
+  
+  aside {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  aside.open {
+    transform: translateX(0);
+  }
+  
+  .ml-64 {
+    margin-left: 0;
   }
 }

@@ -16,81 +16,74 @@ export default function Home() {
 
   return (
     <main className="flex">
-      {/* Sidebar */}
+      {/* Updated Sidebar with comprehensive documentation */}
       <aside className="fixed left-0 h-screen w-64 bg-black/30 backdrop-blur-md border-r border-purple-900/30 overflow-y-auto">
         <div className="p-4">
           <h3 className="text-lg font-semibold mb-4 text-purple-400">Documentation</h3>
           <nav className="space-y-2">
-            <details className="group">
-              <summary className="flex items-center cursor-pointer text-gray-300 hover:text-purple-400">
-                CLI Documentation
-              </summary>
-              <div className="pl-4 mt-2 space-y-2">
-                <a href="#installation" className="block text-sm text-gray-400 hover:text-purple-400">
-                  Installation &amp; CLI Commands
-                </a>
-                <a href="#cli-usage" className="block text-sm text-gray-400 hover:text-purple-400">
-                  Graphical CLI Overview
-                </a>
-                <a href="#cli-help" className="block text-sm text-gray-400 hover:text-purple-400">
-                  Detailed CLI Help
-                </a>
-              </div>
-            </details>
-            <details className="group">
-              <summary className="flex items-center cursor-pointer text-gray-300 hover:text-purple-400">
-                IDE (Under Development)
-              </summary>
-              <div className="pl-4 mt-2 space-y-2">
-                <span className="block text-sm text-gray-400">
-                  IDE features are coming soon. This section is under development.
-                </span>
-              </div>
-            </details>
-            <details className="group">
-              <summary className="flex items-center cursor-pointer text-gray-300 hover:text-purple-400">
-                Copilot-Agent (Under Development)
-              </summary>
-              <div className="pl-4 mt-2 space-y-2">
-                <span className="block text-sm text-gray-400">
-                  Copilot-Agent integration is not yet available. Stay tuned!
-                </span>
-              </div>
-            </details>
-            <details className="group">
-              <summary className="flex items-center cursor-pointer text-gray-300 hover:text-purple-400">
-                Degit (Under Development)
-              </summary>
-              <div className="pl-4 mt-2 space-y-2">
-                <span className="block text-sm text-gray-400">
-                  Degit support is currently in progress and will be available soon.
-                </span>
-              </div>
-            </details>
-            <details className="group">
+            <details className="group" open>
               <summary className="flex items-center cursor-pointer text-gray-300 hover:text-purple-400">
                 Getting Started
               </summary>
               <div className="pl-4 mt-2 space-y-2">
                 <a href="#installation" className="block text-sm text-gray-400 hover:text-purple-400">Installation</a>
+                <a href="#configuration" className="block text-sm text-gray-400 hover:text-purple-400">Configuration</a>
                 <a href="#quickstart" className="block text-sm text-gray-400 hover:text-purple-400">Quick Start</a>
               </div>
             </details>
+            
             <details className="group">
               <summary className="flex items-center cursor-pointer text-gray-300 hover:text-purple-400">
-                Features
+                Core Features
               </summary>
               <div className="pl-4 mt-2 space-y-2">
-                <a href="#ai-completion" className="block text-sm text-gray-400 hover:text-purple-400">AI Completion</a>
-                <a href="#code-analysis" className="block text-sm text-gray-400 hover:text-purple-400">Code Analysis</a>
+                <a href="#project-analysis" className="block text-sm text-gray-400 hover:text-purple-400">Project Analysis</a>
+                <a href="#ai-prompting" className="block text-sm text-gray-400 hover:text-purple-400">AI Prompting</a>
+                <a href="#code-explanation" className="block text-sm text-gray-400 hover:text-purple-400">Code Explanation</a>
+                <a href="#code-editing" className="block text-sm text-gray-400 hover:text-purple-400">Code Editing</a>
+                <a href="#suggestions" className="block text-sm text-gray-400 hover:text-purple-400">Code Suggestions</a>
+                <a href="#git-integration" className="block text-sm text-gray-400 hover:text-purple-400">Git Integration</a>
+              </div>
+            </details>
+
+            <details className="group">
+              <summary className="flex items-center cursor-pointer text-gray-300 hover:text-purple-400">
+                AI Models & Integration
+              </summary>
+              <div className="pl-4 mt-2 space-y-2">
+                <a href="#local-models" className="block text-sm text-gray-400 hover:text-purple-400">Local Models</a>
+                <a href="#secret-ai" className="block text-sm text-gray-400 hover:text-purple-400">Secret AI Integration</a>
+              </div>
+            </details>
+
+            <details className="group">
+              <summary className="flex items-center cursor-pointer text-gray-300 hover:text-purple-400">
+                Web3 Development
+              </summary>
+              <div className="pl-4 mt-2 space-y-2">
+                <a href="#web3-scaffold" className="block text-sm text-gray-400 hover:text-purple-400">Project Scaffolding</a>
+                <a href="#web3-analysis" className="block text-sm text-gray-400 hover:text-purple-400">Smart Contract Analysis</a>
+                <a href="#web3-gas" className="block text-sm text-gray-400 hover:text-purple-400">Gas Estimation</a>
+                <a href="#web3-tests" className="block text-sm text-gray-400 hover:text-purple-400">Test Generation</a>
+              </div>
+            </details>
+
+            <details className="group">
+              <summary className="flex items-center cursor-pointer text-gray-300 hover:text-purple-400">
+                Advanced Usage
+              </summary>
+              <div className="pl-4 mt-2 space-y-2">
+                <a href="#command-processing" className="block text-sm text-gray-400 hover:text-purple-400">Command Processing</a>
+                <a href="#code-format" className="block text-sm text-gray-400 hover:text-purple-400">Code Format Processing</a>
+                <a href="#directory-analysis" className="block text-sm text-gray-400 hover:text-purple-400">Directory Analysis</a>
               </div>
             </details>
           </nav>
         </div>
       </aside>
 
-      {/* Main content */}
-      <div className="ml-64 w-full">
+      {/* Main content with proper spacing and layout */}
+      <div className="ml-64 min-h-screen w-[calc(100%-16rem)]">
         <div className="breathing-bg" />
         <div className="cursor" style={{ left: mousePosition.x - 10, top: mousePosition.y - 10 }} />
         <div className="cursor-trail" style={{ left: mousePosition.x - 50, top: mousePosition.y - 50 }} />
@@ -188,15 +181,41 @@ export default function Home() {
         </section>
 
         {/* New Documentation Sections */}
-        <section id="installation" className="section">
+        <section id="installation" className="section pt-20">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="max-w-3xl"
+            className="max-w-4xl w-full"
           >
             <h2 className="text-4xl font-bold mb-8">Installation</h2>
-            <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md">
-              <code className="text-purple-400">npm install codeforgeai</code>
+            <div className="space-y-6">
+              <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md">
+                <h3 className="text-xl font-semibold mb-4">Prerequisites</h3>
+                <ul className="list-disc list-inside space-y-2 text-gray-300">
+                  <li>Python 3.8 or higher</li>
+                  <li>Git</li>
+                  <li>Ollama (for local AI models)</li>
+                </ul>
+              </div>
+
+              <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md">
+                <h3 className="text-xl font-semibold mb-4">Step-by-Step Installation</h3>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-gray-300 mb-2">1. Clone the repository:</p>
+                    <code className="block bg-black/50 p-3 rounded-lg font-mono text-purple-400">
+                      git clone https://github.com/codeforge-ide/codeforgeai.git
+                      cd codeforgeai
+                    </code>
+                  </div>
+                  <div>
+                    <p className="text-gray-300 mb-2">2. Install in development mode:</p>
+                    <code className="block bg-black/50 p-3 rounded-lg font-mono text-purple-400">
+                      pip install -e .
+                    </code>
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.div>
         </section>
