@@ -29,7 +29,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="flex">
+      <main className="flex min-h-screen">
         {/* Sidebar - now fixed position and independently scrollable */}
         <aside 
           ref={sidebarRef}
@@ -139,7 +139,7 @@ export default function Home() {
         </aside>
 
         {/* Main content with adjusted margin to accommodate fixed sidebar */}
-        <div id="content" className="min-h-screen ml-64 w-[calc(100%-16rem)]">
+        <div className="flex-1 ml-64">
           <div className="breathing-bg" />
           <div className="cursor" style={{ left: mousePosition.x - 10, top: mousePosition.y - 10 }} />
           <div className="cursor-trail" style={{ left: mousePosition.x - 50, top: mousePosition.y - 50 }} />
@@ -169,7 +169,7 @@ export default function Home() {
           </nav>
 
           {/* Main Content Sections */}
-          <div className="main-content">
+          <div className="main-content px-6 pt-16">
             {/* Hero Section with improved styling */}
             <section id="home" className="section flex flex-col items-center justify-center min-h-[90vh] text-center">
               <motion.div
