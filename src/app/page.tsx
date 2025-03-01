@@ -30,7 +30,7 @@ export default function Home() {
   return (
     <>
       <main className="flex min-h-screen">
-        {/* Sidebar - now fixed position and independently scrollable */}
+        {/* Sidebar - fixed position and independently scrollable */}
         <aside 
           ref={sidebarRef}
           id="sidebar" 
@@ -138,14 +138,14 @@ export default function Home() {
           </div>
         </aside>
 
-        {/* Main content with adjusted margin to accommodate fixed sidebar */}
-        <div className="ml-64 w-[calc(100% - 16rem)]">
+        {/* Main content wrapper with proper spacing */}
+        <div className="flex-1 ml-64"> {/* Adjust margin to match sidebar width */}
           <div className="breathing-bg" />
           <div className="cursor" style={{ left: mousePosition.x - 10, top: mousePosition.y - 10 }} />
           <div className="cursor-trail" style={{ left: mousePosition.x - 50, top: mousePosition.y - 50 }} />
 
-          {/* Updated navigation - removed mobile toggle button */}
-          <nav className="fixed top-0 right-0 left-64 bg-black/50 backdrop-blur-md z-30 border-b border-purple-900/30">
+          {/* Updated navigation - attached to main content container */}
+          <nav className="sticky top-0 bg-black/50 backdrop-blur-md z-30 border-b border-purple-900/30">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between items-center h-16">
                 <ul className="flex items-center space-x-8">
@@ -168,8 +168,8 @@ export default function Home() {
             </div>
           </nav>
 
-          {/* Main Content Sections */}
-          <div className="main-content px-6 pt-16">
+          {/* Main Content Sections - now with proper width */}
+          <div className="main-content px-6">
             {/* Hero Section with improved styling */}
             <section id="home" className="section flex flex-col items-center justify-center min-h-[90vh] text-center">
               <motion.div
