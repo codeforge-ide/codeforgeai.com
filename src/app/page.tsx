@@ -500,7 +500,7 @@ This file contains a Flask web application that serves as a REST API. Here's a b
             {/* ... */}
             
             {/* Footer Section */}
-            <footer className="py-12 mt-24 border-t border-purple-900/30 text-center"></footer>
+            <footer className="py-12 mt-24 border-t border-purple-900/30 text-center">
               <div className="max-w-4xl mx-auto">
                 <div className="mb-8">
                   <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-400 to-green-400 bg-clip-text text-transparent">CodeForgeAI</h2>
