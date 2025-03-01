@@ -164,3 +164,75 @@ code {
     margin-left: 0;
   }
 }
+
+/* Update sidebar styling */
+.documentation-sidebar {
+  padding: 2rem 1rem;
+  height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
+}
+
+.documentation-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.documentation-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.documentation-sidebar::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 3px;
+}
+
+/* Fix details/summary styling */
+details {
+  margin-bottom: 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+details > summary {
+  padding: 0.75rem 1rem;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+details > summary:after {
+  content: '+';
+  font-size: 1.2em;
+  transition: transform 0.2s ease;
+}
+
+details[open] > summary:after {
+  transform: rotate(45deg);
+}
+
+details > summary:hover {
+  background: rgba(138, 43, 226, 0.1);
+}
+
+details[open] {
+  padding-bottom: 0.75rem;
+}
+
+details[open] > summary {
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+}
+
+/* Update main content spacing */
+.main-content {
+  padding-top: 4rem; /* Account for fixed navbar */
+  padding-left: 2rem;
+  padding-right: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
