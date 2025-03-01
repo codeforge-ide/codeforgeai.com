@@ -58,7 +58,7 @@ export default function Home() {
   }, [mobileMenuOpen]);
 
   return (
-    <React.Fragment>
+    <>
       <main className="flex">
         {/* Mobile nav overlay */}
         <div 
@@ -487,6 +487,6 @@ export default function Home() {
           </div>
         </div>
       </main>
-    </React.Fragment>
+    </>
   );
 }
