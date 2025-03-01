@@ -23,6 +23,52 @@ export default function Home() {
           <nav className="space-y-2">
             <details className="group">
               <summary className="flex items-center cursor-pointer text-gray-300 hover:text-purple-400">
+                CLI Documentation
+              </summary>
+              <div className="pl-4 mt-2 space-y-2">
+                <a href="#installation" className="block text-sm text-gray-400 hover:text-purple-400">
+                  Installation &amp; CLI Commands
+                </a>
+                <a href="#cli-usage" className="block text-sm text-gray-400 hover:text-purple-400">
+                  Graphical CLI Overview
+                </a>
+                <a href="#cli-help" className="block text-sm text-gray-400 hover:text-purple-400">
+                  Detailed CLI Help
+                </a>
+              </div>
+            </details>
+            <details className="group">
+              <summary className="flex items-center cursor-pointer text-gray-300 hover:text-purple-400">
+                IDE (Under Development)
+              </summary>
+              <div className="pl-4 mt-2 space-y-2">
+                <span className="block text-sm text-gray-400">
+                  IDE features are coming soon. This section is under development.
+                </span>
+              </div>
+            </details>
+            <details className="group">
+              <summary className="flex items-center cursor-pointer text-gray-300 hover:text-purple-400">
+                Copilot-Agent (Under Development)
+              </summary>
+              <div className="pl-4 mt-2 space-y-2">
+                <span className="block text-sm text-gray-400">
+                  Copilot-Agent integration is not yet available. Stay tuned!
+                </span>
+              </div>
+            </details>
+            <details className="group">
+              <summary className="flex items-center cursor-pointer text-gray-300 hover:text-purple-400">
+                Degit (Under Development)
+              </summary>
+              <div className="pl-4 mt-2 space-y-2">
+                <span className="block text-sm text-gray-400">
+                  Degit support is currently in progress and will be available soon.
+                </span>
+              </div>
+            </details>
+            <details className="group">
+              <summary className="flex items-center cursor-pointer text-gray-300 hover:text-purple-400">
                 Getting Started
               </summary>
               <div className="pl-4 mt-2 space-y-2">
