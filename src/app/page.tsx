@@ -139,7 +139,7 @@ export default function Home() {
         </aside>
 
         {/* Main content with adjusted margin to accommodate fixed sidebar */}
-        <div id="content" className="min-h-screen w-full ml-64">
+        <div id="content" className="min-h-screen ml-64 w-[calc(100%-16rem)]">
           <div className="breathing-bg" />
           <div className="cursor" style={{ left: mousePosition.x - 10, top: mousePosition.y - 10 }} />
           <div className="cursor-trail" style={{ left: mousePosition.x - 50, top: mousePosition.y - 50 }} />
