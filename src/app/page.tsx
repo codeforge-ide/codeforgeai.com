@@ -12,68 +12,30 @@ import {
 
 export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
-  const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
     
-    const handleClickOutside = (e: MouseEvent) => {
-      if (mobileMenuOpen && 
-          sidebarRef.current && 
-          !sidebarRef.current.contains(e.target as Node)) {
-        setMobileMenuOpen(false);
-      }
-    };
-    
     window.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mousedown', handleClickOutside);
-    
-    // Handle body scroll when menu is open
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
     
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [mobileMenuOpen]);
-
-  // Close menu on window resize if screen becomes large
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 768 && mobileMenuOpen) {
-        setMobileMenuOpen(false);
-      }
-    };
-    
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [mobileMenuOpen]);
+  }, []);
 
   return (
     <>
       <main className="flex">
-        {/* Mobile nav overlay */}
-        <div 
-          ref={overlayRef}
-          className={`mobile-nav-overlay ${mobileMenuOpen ? 'active' : ''}`} 
-          onClick={() => setMobileMenuOpen(false)}
-        />
-        
-        {/* Sidebar with proper structure */}
+        {/* Sidebar - now fixed position and independently scrollable */}
         <aside 
           ref={sidebarRef}
           id="sidebar" 
-          className={`${mobileMenuOpen ? 'open' : ''} bg-black/30 backdrop-blur-md border-r border-purple-900/30 z-40`}
+          className="fixed left-0 top-0 h-screen w-64 overflow-y-auto bg-black/30 backdrop-blur-md border-r border-purple-900/30 z-40"
         >
-          <div className="documentation-sidebar">
+          <div className="documentation-sidebar p-6">
             <h3 className="text-lg font-semibold mb-6 text-purple-400">Documentation</h3>
             <nav className="space-y-4">
               {/* Getting Started Section */}
@@ -175,29 +137,17 @@ export default function Home() {
           </div>
         </aside>
 
-        {/* Main content with proper padding and structure */}
-        <div id="content" className="min-h-screen w-full md:ml-64">
+        {/* Main content with adjusted margin to accommodate fixed sidebar */}
+        <div id="content" className="min-h-screen w-full ml-64">
           <div className="breathing-bg" />
           <div className="cursor" style={{ left: mousePosition.x - 10, top: mousePosition.y - 10 }} />
           <div className="cursor-trail" style={{ left: mousePosition.x - 50, top: mousePosition.y - 50 }} />
 
-          {/* Improved navigation with mobile toggle button */}
-          <nav className="fixed top-0 right-0 left-0 md:left-64 bg-black/50 backdrop-blur-md z-30 border-b border-purple-900/30">
+          {/* Updated navigation - removed mobile toggle button */}
+          <nav className="fixed top-0 right-0 left-64 bg-black/50 backdrop-blur-md z-30 border-b border-purple-900/30">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between items-center h-16">
-                <div className="flex md:hidden">
-                  <button 
-                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
-                    className="text-white p-2 rounded-md hover:bg-purple-900/30"
-                    aria-label="Toggle navigation menu"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                  </button>
-                </div>
-                
-                <ul className="hidden md:flex items-center space-x-8">
+                <ul className="flex items-center space-x-8">
                   <li><a href="#home" className="text-white hover:text-purple-400 transition-colors">Home</a></li>
                   <li><a href="#about" className="text-white hover:text-purple-400 transition-colors">About</a></li>
                   <li><a href="#showcase" className="text-white hover:text-purple-400 transition-colors">Showcase</a></li>
@@ -423,14 +373,6 @@ export default function Home() {
                       <li><strong className="text-purple-400">general_model</strong>: The AI model for general prompts (default: "tinyllama")</li>
                       <li><strong className="text-purple-400">code_model</strong>: The AI model for code-specific tasks (default: "qwen2.5-coder:0.5b")</li>
                       <li><strong className="text-purple-400">format_line_separator</strong>: Number of newlines between extracted code blocks (default: 5)</li>
-                    
-                    
-                    
-                    
-                    
-                    
-
-
                     </ul>
                   </div>
 
