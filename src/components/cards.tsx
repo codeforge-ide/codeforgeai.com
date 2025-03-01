@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface FeatureCardProps {
@@ -14,8 +14,29 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({
   icon,
   delay = 0 
 }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  
+  // Add mouse move effect for glow
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / card.offsetWidth) * 100;
+      const y = ((e.clientY - rect.top) / card.offsetHeight) * 100;
+      
+      card.style.setProperty('--x', `${x}%`);
+      card.style.setProperty('--y', `${y}%`);
+    };
+    
+    card.addEventListener('mousemove', handleMouseMove);
+    return () => card.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+  
   return (
     <motion.div 
+      ref={cardRef}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ 
@@ -60,7 +81,7 @@ export const GlassCard: React.FC<{
         damping: 15
       }}
       viewport={{ once: true, margin: "-50px" }}
-      className={`p-6 bg-black/30 rounded-xl backdrop-blur-md border border-purple-900/30 shadow-xl ${className} elevation-2`}
+      className={`p-6 bg-black/30 rounded-xl backdrop-blur-md border border-purple-900/30 shadow-xl relative overflow-hidden ${className} elevation-2`}
       whileHover={hover ? { 
         scale: 1.03,
         boxShadow: "0 20px 40px -10px rgba(138, 43, 226, 0.4)",
@@ -71,6 +92,7 @@ export const GlassCard: React.FC<{
         {children}
       </div>
       <div className="card-reflection"></div>
+      <div className="absolute -bottom-2 left-0 w-full h-[1px] bg-gradient-to-r from-purple-600/0 via-purple-600 to-purple-600/0"></div>
     </motion.div>
   );
 };
@@ -153,7 +175,7 @@ export const ParallaxCard: React.FC<{
   children: React.ReactNode;
   depth?: number;
   className?: string;
-}> = ({ children, depth = 50, className = "" }) => {
+}> = ({ children, depth = 20, className = "" }) => {
   const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = React.useState(false);
   const cardRef = React.useRef<HTMLDivElement>(null);
@@ -207,5 +229,34 @@ export const ParallaxCard: React.FC<{
         />
       )}
     </motion.div>
+  );
+};
+
+// New TextGradient component for consistent gradient text
+export const TextGradient: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+  from?: string;
+  to?: string;
+}> = ({ children, className = "", from = "purple-400", to = "purple-600" }) => {
+  return (
+    <span className={`bg-gradient-to-r from-${from} to-${to} bg-clip-text text-transparent ${className}`}>
+      {children}
+    </span>
+  );
+};
+
+// New component for highlighted code
+export const CodeHighlight: React.FC<{
+  children: React.ReactNode;
+  language?: string;
+  className?: string;
+}> = ({ children, language = "bash", className = "" }) => {
+  return (
+    <pre className={`p-4 rounded-lg bg-black/50 border border-purple-900/30 overflow-auto ${className}`}>
+      <code className={`language-${language}`}>
+        {children}
+      </code>
+    </pre>
   );
 };

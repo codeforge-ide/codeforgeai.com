@@ -5,6 +5,7 @@
   --secondary: #00FF7F;
   --background: #0a0a0a;
   --text: #ffffff;
+  --sidebar-width: 16rem;
 }
 
 * {
@@ -14,10 +15,21 @@
   cursor: none;
 }
 
+@media (max-width: 768px) {
+  * {
+    cursor: auto;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--text);
   overflow-x: hidden;
+  font-family: var(--font-inter), sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-poppins), sans-serif;
 }
 
 .cursor {
@@ -28,6 +40,7 @@ body {
   position: fixed;
   pointer-events: none;
   z-index: 999;
+  transition: transform 0.1s ease;
 }
 
 /* Update cursor-trail with animated color waves */
@@ -39,6 +52,7 @@ body {
   pointer-events: none;
   z-index: 998;
   animation: wave 2s linear infinite;
+  transition: transform 0.2s ease-out;
 }
 
 /* Updated jellyfish-like animated background */
@@ -100,11 +114,26 @@ body {
 /* Fix section padding and spacing */
 .section {
   min-height: 100vh;
-  padding: 4rem 2rem;
+  padding: 6rem 2rem 4rem;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   position: relative;
+}
+
+/* Elevation classes for consistent depth effects */
+.elevation-1 {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.elevation-2 {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05),
+              0 0 15px 0 rgba(138, 43, 226, 0.15);
+}
+
+.elevation-3 {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04),
+              0 0 20px 0 rgba(138, 43, 226, 0.2);
 }
 
 /* Improve documentation sidebar styling */
@@ -117,10 +146,29 @@ details > summary {
   padding: 0.75rem;
   border-radius: 0.5rem;
   transition: all 0.2s ease;
+  list-style: none; /* Remove default triangle */
+  cursor: pointer;
 }
 
 details > summary:hover {
   background: rgba(138, 43, 226, 0.1);
+}
+
+details > summary::marker,
+details > summary::-webkit-details-marker {
+  display: none; /* Hide default marker */
+}
+
+details > summary::after {
+  content: '+';
+  float: right;
+  font-size: 1.2em;
+  transition: transform 0.2s ease;
+  margin-left: 0.5rem;
+}
+
+details[open] > summary::after {
+  transform: rotate(45deg);
 }
 
 details[open] {
@@ -141,34 +189,118 @@ html {
 
 /* Improve code block styling */
 code {
-  font-family: var(--font-jetbrains);
+  font-family: var(--font-jetbrains), monospace;
   font-size: 0.9em;
 }
 
+/* Card reflection effect */
+.card-reflection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0) 40%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Text shadow for better visibility on gradients */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Glow effect for feature cards */
+.glow-effect {
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(138, 43, 226, 0.3) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.showcase-item:hover .glow-effect {
+  opacity: 1;
+}
+
+/* 3D card effects */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
 /* Responsive improvements */
-@media (max-width: 768px) {
-  .section {
-    padding: 3rem 1rem;
-  }
-  
-  aside {
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-  }
-  
-  aside.open {
-    transform: translateX(0);
-  }
-  
-  .ml-64 {
-    margin-left: 0;
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-width: 14rem;
   }
 }
 
-/* Update sidebar styling */
+@media (max-width: 768px) {
+  .section {
+    padding: 5rem 1rem 3rem;
+  }
+  
+  .cursor, .cursor-trail {
+    display: none;
+  }
+
+  /* Mobile sidebar positioning */
+  #sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 18rem;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 50;
+    box-shadow: none;
+  }
+  
+  #sidebar.open {
+    transform: translateX(0);
+    box-shadow: 0 0 30px rgba(0,0,0,0.7);
+  }
+  
+  #content {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .mobile-nav-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .mobile-nav-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* Update documentation sidebar styling */
 .documentation-sidebar {
   padding: 2rem 1rem;
-  height: 100vh;
+  height: 100%;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--primary) transparent;
@@ -230,9 +362,7 @@ details[open] > summary {
 
 /* Update main content spacing */
 .main-content {
-  padding-top: 4rem; /* Account for fixed navbar */
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding: 4rem 2rem 2rem; /* Account for fixed navbar */
   max-width: 1200px;
   margin: 0 auto;
 }
