@@ -423,9 +423,17 @@ export default function Home() {
                       <li><strong className="text-purple-400">general_model</strong>: The AI model for general prompts (default: "tinyllama")</li>
                       <li><strong className="text-purple-400">code_model</strong>: The AI model for code-specific tasks (default: "qwen2.5-coder:0.5b")</li>
                       <li><strong className="text-purple-400">format_line_separator</strong>: Number of newlines between extracted code blocks (default: 5)</li>
+                    
+                    
+                    
+                    
+                    
+                    
+
+
                     </ul>
                   </div>
-                </div>
+
               </motion.div>
             </section>
 
@@ -434,7 +442,7 @@ export default function Home() {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 className="max-w-4xl w-full"
-              ></motion.div>
+              >
                 <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Quick Start</h2>
                 <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md border border-purple-900/20">
                   <h3 className="text-xl font-semibold mb-4 text-purple-400">Basic Commands</h3>
