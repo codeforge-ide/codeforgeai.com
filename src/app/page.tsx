@@ -9,6 +9,7 @@ import {
   TextGradient,
   CodeHighlight
 } from '@/components/cards';
+import CommandDisplay from '@/components/CommandDisplay';
 
 export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -226,42 +227,42 @@ export default function Home() {
                   <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md border border-purple-900/20 hover:border-purple-500/30 transition-all hover:-translate-y-1">
                     <h3 className="text-2xl font-bold mb-4 text-purple-400">Project Analysis</h3>
                     <p className="text-gray-300 mb-4">Analyze your project structure and get insights about your codebase with AI-powered tools.</p>
-                    <code className="text-xs bg-black/50 p-2 rounded block text-gray-300">codeforgeai analyze</code>
+                    <CommandDisplay command="codeforgeai analyze" />
                   </div>
                   
                   {/* Feature Card 2 */}
                   <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md border border-purple-900/20 hover:border-purple-500/30 transition-all hover:-translate-y-1">
                     <h3 className="text-2xl font-bold mb-4 text-purple-400">AI Code Completion</h3>
                     <p className="text-gray-300 mb-4">Get intelligent code suggestions and completions powered by advanced AI models.</p>
-                    <code className="text-xs bg-black/50 p-2 rounded block text-gray-300">codeforgeai suggestion</code>
+                    <CommandDisplay command="codeforgeai suggestion" />
                   </div>
                   
                   {/* Feature Card 3 */}
                   <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md border border-purple-900/20 hover:border-purple-500/30 transition-all hover:-translate-y-1">
                     <h3 className="text-2xl font-bold mb-4 text-purple-400">Code Explanation</h3>
                     <p className="text-gray-300 mb-4">Get detailed explanations of complex code to understand functionality and logic.</p>
-                    <code className="text-xs bg-black/50 p-2 rounded block text-gray-300">codeforgeai explain filename.py</code>
+                    <CommandDisplay command="codeforgeai explain filename.py" />
                   </div>
                   
                   {/* Feature Card 4 */}
                   <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md border border-purple-900/20 hover:border-purple-500/30 transition-all hover:-translate-y-1">
                     <h3 className="text-2xl font-bold mb-4 text-purple-400">Smart Contract Analysis</h3>
                     <p className="text-gray-300 mb-4">Analyze Web3 smart contracts for security vulnerabilities and optimization opportunities.</p>
-                    <code className="text-xs bg-black/50 p-2 rounded block text-gray-300">codeforgeai web3 analyze-contract</code>
+                    <CommandDisplay command="codeforgeai web3 analyze-contract" />
                   </div>
                   
                   {/* Feature Card 5 */}
                   <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md border border-purple-900/20 hover:border-purple-500/30 transition-all hover:-translate-y-1">
                     <h3 className="text-2xl font-bold mb-4 text-purple-400">Git Integration</h3>
                     <p className="text-gray-300 mb-4">Generate meaningful commit messages with appropriate emojis based on your changes.</p>
-                    <code className="text-xs bg-black/50 p-2 rounded block text-gray-300">codeforgeai commit-message</code>
+                    <CommandDisplay command="codeforgeai commit-message" />
                   </div>
                   
                   {/* Feature Card 6 */}
                   <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md border border-purple-900/20 hover:border-purple-500/30 transition-all hover:-translate-y-1">
                     <h3 className="text-2xl font-bold mb-4 text-purple-400">Command Processing</h3>
                     <p className="text-gray-300 mb-4">Generate terminal commands for complex tasks using natural language instructions.</p>
-                    <code className="text-xs bg-black/50 p-2 rounded block text-gray-300">codeforgeai command "setup project"</code>
+                    <CommandDisplay command='codeforgeai command "setup project"' />
                   </div>
                 </div>
               </motion.div>
@@ -324,22 +325,39 @@ export default function Home() {
                     <div className="space-y-4">
                       <div>
                         <p className="text-gray-300 mb-2">1. Clone the repository:</p>
-                        <code className="block bg-black/50 p-3 rounded-lg font-mono text-purple-400 overflow-x-auto">
-                          git clone https://github.com/codeforge-ide/codeforgeai.git<br/>
-                          cd codeforgeai
-                        </code>
+                        <CommandDisplay 
+                          command="git clone https://github.com/codeforge-ide/codeforgeai.git && cd codeforgeai"
+                          description="Clone the repository and navigate to the project directory"
+                        />
                       </div>
                       <div>
                         <p className="text-gray-300 mb-2">2. Install in development mode:</p>
-                        <code className="block bg-black/50 p-3 rounded-lg font-mono text-purple-400">
-                          pip install -e .
-                        </code>
+                        <CommandDisplay 
+                          command="pip install -e ."
+                          description="Install the package in development mode"
+                          output="Successfully installed codeforgeai-0.1.0"
+                        />
                       </div>
                       <div>
                         <p className="text-gray-300 mb-2">3. Verify your installation:</p>
-                        <code className="block bg-black/50 p-3 rounded-lg font-mono text-purple-400">
-                          codeforgeai --help
-                        </code>
+                        <CommandDisplay 
+                          command="codeforgeai --help"
+                          description="Check if the installation was successful"
+                          output="Usage: codeforgeai [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  analyze          Analyze project structure
+  command          Generate terminal commands
+  commit-message   Generate commit messages
+  config           View or modify configuration
+  explain          Explain code in a file
+  prompt           Send a prompt to the AI
+  suggestion       Get code suggestions
+  web3             Web3 development commands"
+                        />
                       </div>
                     </div>
                   </div>
@@ -362,12 +380,27 @@ export default function Home() {
                   
                   <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md border border-purple-900/20">
                     <h3 className="text-xl font-semibold mb-4 text-purple-400">View Current Configuration</h3>
-                    <code className="block bg-black/50 p-3 rounded-lg font-mono text-purple-400">
-                      codeforgeai config
-                    </code>
+                    <CommandDisplay 
+                      command="codeforgeai config"
+                      description="View your current configuration settings"
+                      output="{
+  \u0022general_model\u0022: \u0022tinyllama\u0022,
+  \u0022code_model\u0022: \u0022qwen2.5-coder:0.5b\u0022,
+  \u0022format_line_separator\u0022: 5
+}"
+                    />
                   </div>
                   
-                  <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md border border-purple-900/20"></div>
+                  <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md border border-purple-900/20">
+                    <h3 className="text-xl font-semibold mb-4 text-purple-400">Update Configuration</h3>
+                    <CommandDisplay 
+                      command="codeforgeai config --set code_model=qwen2.5-coder:2b"
+                      description="Update a specific configuration setting"
+                      output="Configuration updated successfully!"
+                    />
+                  </div>
+
+                  <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md border border-purple-900/20">
                     <h3 className="text-xl font-semibold mb-4 text-purple-400">Key Configuration Options</h3>
                     <ul className="space-y-3 text-gray-300">
                       <li><strong className="text-purple-400">general_model</strong>: The AI model for general prompts (default: "tinyllama")</li>
@@ -375,7 +408,7 @@ export default function Home() {
                       <li><strong className="text-purple-400">format_line_separator</strong>: Number of newlines between extracted code blocks (default: 5)</li>
                     </ul>
                   </div>
-
+                </div>
               </motion.div>
             </section>
 
@@ -391,21 +424,71 @@ export default function Home() {
                   <div className="space-y-4">
                     <div>
                       <p className="text-gray-300 mb-2">Analyze your project structure:</p>
-                      <code className="block bg-black/50 p-3 rounded-lg font-mono text-purple-400">
-                        codeforgeai analyze
-                      </code>
+                      <CommandDisplay 
+                        command="codeforgeai analyze"
+                        description="Get an overview of your project codebase"
+                        output="Analyzing project structure...
+Found 42 files in 8 directories
+Main technologies: Python, JavaScript, HTML/CSS
+Project type: Web Application with API"
+                      />
                     </div>
                     <div>
                       <p className="text-gray-300 mb-2">Get AI assistance for coding tasks:</p>
-                      <code className="block bg-black/50 p-3 rounded-lg font-mono text-purple-400">
-                        codeforgeai prompt "Create a function to calculate Fibonacci numbers"
-                      </code>
+                      <CommandDisplay 
+                        command='codeforgeai prompt "Create a function to calculate Fibonacci numbers"'
+                        description="Ask the AI for code solutions"
+                        output="def fibonacci(n):
+    \u0022\u0022\u0022
+    Calculate the nth number in the Fibonacci sequence.
+    
+    Args:
+        n: A positive integer
+        
+    Returns:
+        The nth Fibonacci number
+    \u0022\u0022\u0022
+    if n <= 0:
+        raise ValueError(\u0022Input must be a positive integer\u0022)
+    elif n == 1:
+        return 0
+    elif n == 2:
+        return 1
+    
+    # Initialize the first two Fibonacci numbers
+    a, b = 0, 1
+    
+    # Calculate the nth Fibonacci number
+    for _ in range(3, n+1):
+        a, b = b, a + b
+        
+    return b"
+                      />
                     </div>
                     <div>
                       <p className="text-gray-300 mb-2">Get explanations for code in a file:</p>
-                      <code className="block bg-black/50 p-3 rounded-lg font-mono text-purple-400">
-                        codeforgeai explain path/to/file.py
-                      </code>
+                      <CommandDisplay 
+                        command="codeforgeai explain path/to/file.py"
+                        description="Get a detailed explanation of code functionality"
+                        output="# Code Explanation for file.py
+
+This file contains a Flask web application that serves as a REST API. Here's a breakdown:
+
+1. Imports and setup:
+   - Flask framework and related modules
+   - Database connection utilities
+   - Authentication helpers
+
+2. Routes:
+   - GET /api/users - Returns a list of users (requires authentication)
+   - POST /api/login - Handles user authentication and returns JWT tokens
+   - PUT /api/users/:id - Updates user information
+
+3. Key functionality:
+   - JWT-based authentication
+   - Database connection pooling
+   - Request rate limiting"
+                      />
                     </div>
                   </div>
                 </div>
@@ -417,7 +500,7 @@ export default function Home() {
             {/* ... */}
             
             {/* Footer Section */}
-            <footer className="py-12 mt-24 border-t border-purple-900/30 text-center">
+            <footer className="py-12 mt-24 border-t border-purple-900/30 text-center"></footer>
               <div className="max-w-4xl mx-auto">
                 <div className="mb-8">
                   <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-400 to-green-400 bg-clip-text text-transparent">CodeForgeAI</h2>
