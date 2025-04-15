@@ -25,8 +25,8 @@ export default function Home() {
 
   return (
     <>
-      <main className="flex min-h-screen bg-gradient-to-br from-[#0a0a0a] via-[#18122B] to-[#2D3250]">
-        {/* Sidebar */}
+      <main className="min-h-screen bg-gradient-to-br from-[#0a0a0a] via-[#18122B] to-[#2D3250]">
+        {/* Sidebar (fixed position, consistent width) */}
         <aside
           ref={sidebarRef}
           id="sidebar"
@@ -132,8 +132,8 @@ export default function Home() {
           </div>
         </aside>
 
-        {/* Main content */}
-        <div className="flex-1 flex flex-col min-h-screen ml-0 lg:ml-64">
+        {/* Main content wrapper - ensure lg:ml-64 for proper spacing on large screens */}
+        <div className="flex flex-col min-h-screen ml-0 lg:ml-64">
           {/* Top nav */}
           <nav className="sticky top-0 bg-black/60 backdrop-blur-lg z-30 border-b border-purple-900/30 shadow-md">
             <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
@@ -437,7 +437,7 @@ This file contains a Flask web application that serves as a REST API. Here's a b
             {/* ... */}
             
             {/* Footer */}
-            <footer className="py-16 mt-24 border-t border-purple-900/30 text-center bg-black/30">
+            <footer className="py-16 mt-auto border-t border-purple-900/30 text-center bg-black/30">
               <div className="max-w-4xl mx-auto">
                 <div className="mb-8">
                   <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-400 to-green-400 bg-clip-text text-transparent">CodeForgeAI</h2>
