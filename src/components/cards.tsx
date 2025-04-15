@@ -15,51 +15,32 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({
   delay = 0 
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  
-  // Add mouse move effect for glow
   useEffect(() => {
     const card = cardRef.current;
     if (!card) return;
-    
     const handleMouseMove = (e: MouseEvent) => {
       const rect = card.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / card.offsetWidth) * 100;
       const y = ((e.clientY - rect.top) / card.offsetHeight) * 100;
-      
       card.style.setProperty('--x', `${x}%`);
       card.style.setProperty('--y', `${y}%`);
     };
-    
     card.addEventListener('mousemove', handleMouseMove);
     return () => card.removeEventListener('mousemove', handleMouseMove);
   }, []);
-  
   return (
-    <motion.div 
+    <motion.div
       ref={cardRef}
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ 
-        duration: 0.5, 
-        delay,
-        type: "spring", 
-        stiffness: 100 
-      }}
-      viewport={{ once: true, margin: "-100px" }}
-      className="p-6 bg-black/40 rounded-xl backdrop-blur-md showcase-item relative overflow-hidden elevation-3"
-      whileHover={{ 
-        y: -8,
-        boxShadow: "0 15px 30px -5px rgba(138, 43, 226, 0.4)",
-        scale: 1.02,
-      }}
-      whileTap={{ scale: 0.98 }}
+      transition={{ duration: 0.5, delay, type: 'spring', stiffness: 100 }}
+      viewport={{ once: true, margin: '-100px' }}
+      className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-black/60 to-purple-900/30 border border-purple-900/40 shadow-xl p-8 flex flex-col items-center group hover:scale-[1.03] hover:shadow-2xl transition-all duration-300 cursor-pointer"
     >
-      <div className="glow-effect absolute inset-0 pointer-events-none"></div>
-      {icon && <div className="text-purple-400 mb-4 text-3xl">{icon}</div>}
-      <h3 className="text-2xl font-bold mb-4 text-white text-shadow">{title}</h3>
-      <p className="text-gray-300">{description}</p>
-      <div className="card-reflection"></div>
-      <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-purple-600/0 via-purple-600 to-purple-600/0 opacity-50"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-700/10 via-green-400/5 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+      {icon && <div className="text-purple-400 mb-4 text-4xl drop-shadow-lg">{icon}</div>}
+      <h3 className="text-2xl font-bold mb-3 text-white text-shadow text-center tracking-tight">{title}</h3>
+      <p className="text-gray-300 text-center mb-2">{description}</p>
     </motion.div>
   );
 };
