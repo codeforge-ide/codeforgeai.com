@@ -4,7 +4,7 @@ const Sidebar = forwardRef<HTMLDivElement>((props, ref) => (
   <aside
     ref={ref}
     id="sidebar"
-    className="h-screen w-64 overflow-y-auto bg-black/40 backdrop-blur-xl border-r border-purple-900/40 z-40 shadow-2xl hidden lg:block fixed left-0 top-0"
+    className="fixed left-0 top-0 h-screen w-64 overflow-y-auto bg-black/40 backdrop-blur-xl border-r border-purple-900/40 z-40 shadow-2xl hidden lg:block"
   >
     <div className="documentation-sidebar p-8">
       <h3 className="text-xl font-bold mb-8 text-purple-400 tracking-wide">Documentation</h3>

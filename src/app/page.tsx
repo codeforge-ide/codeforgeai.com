@@ -1,54 +1,41 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useRef } from "react";
-import { motion } from "framer-motion";
-import { FeatureCard, GlassCard, RevealText, TextGradient, CodeHighlight } from "@/components/cards";
-import CommandDisplay from "@/components/CommandDisplay";
-import Sidebar from "@/components/Sidebar";
+import React, { useEffect, useState, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { 
+  FeatureCard, 
+  GlassCard, 
+  RevealText, 
+  TextGradient,
+  CodeHighlight
+} from '@/components/cards';
+import CommandDisplay from '@/components/CommandDisplay';
+import Sidebar from '@/components/Sidebar';
 
 export default function Home() {
-  // Mouse position for any custom effects
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => setMousePosition({ x: e.clientX, y: e.clientY });
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Sidebar open state for mobile
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#0a0a0a] via-[#18122B] to-[#2D3250]">
-      {/* Responsive layout: sidebar and content as siblings */}
-      <div className="flex min-h-screen">
-        {/* Sidebar: always visible on lg+, drawer on mobile */}
-        <div className="z-40">
-          <div className="hidden lg:block h-full">
-            <Sidebar />
-          </div>
-          {/* Mobile sidebar drawer */}
-          <div className={sidebarOpen ? "fixed inset-0 z-50 flex" : "hidden"}>
-            <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setSidebarOpen(false)} />
-            <div className="relative w-64 h-full bg-black/80 border-r border-purple-900/40 shadow-2xl animate-slideInLeft">
-              <Sidebar />
-              <button className="absolute top-4 right-4 text-gray-400 hover:text-purple-400" onClick={() => setSidebarOpen(false)} aria-label="Close sidebar">✕</button>
-            </div>
-          </div>
-        </div>
-        {/* Main content area */}
-        <div className="flex-1 flex flex-col min-h-screen">
+    <>
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0a0a] via-[#18122B] to-[#2D3250]">
+        {/* Sidebar component */}
+        <Sidebar ref={sidebarRef} />
+        
+        {/* Main content - with lg:ml-64 to offset it by the sidebar width on large screens */}
+        <div className="min-h-screen lg:ml-64">
           {/* Top nav */}
-          <nav className="sticky top-0 bg-black/70 backdrop-blur-lg z-30 border-b border-purple-900/30 shadow-md">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-              <div className="flex items-center gap-4">
-                {/* Mobile sidebar toggle */}
-                <button className="lg:hidden text-gray-300 hover:text-purple-400 p-2" onClick={() => setSidebarOpen(true)} aria-label="Open sidebar">
-                  <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
-                </button>
-                <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-green-400 bg-clip-text text-transparent">CodeForgeAI</span>
-              </div>
-              <ul className="hidden md:flex items-center gap-8">
+          <nav className="sticky top-0 bg-black/60 backdrop-blur-lg z-30 border-b border-purple-900/30 shadow-md">
+            <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+              <ul className="flex items-center gap-8">
                 <li><a href="#home" className="text-white hover:text-purple-400 font-semibold transition-colors">Home</a></li>
                 <li><a href="#about" className="text-white hover:text-purple-400 font-semibold transition-colors">About</a></li>
                 <li><a href="#showcase" className="text-white hover:text-purple-400 font-semibold transition-colors">Features</a></li>
@@ -62,10 +49,11 @@ export default function Home() {
               </a>
             </div>
           </nav>
-          {/* Main Content Sections */}
-          <main className="flex-1 w-full max-w-7xl mx-auto px-4 md:px-8 py-8">
+
+          {/* Main Content Sections - centered with max-width */}
+          <div className="main-content flex-1 px-4 md:px-8 py-8 max-w-7xl mx-auto">
             {/* Hero Section */}
-            <section id="home" className="flex flex-col items-center justify-center min-h-[80vh] text-center relative">
+            <section id="home" className="section flex flex-col items-center justify-center min-h-[80vh] text-center relative">
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl mx-auto">
                 <h1 className="text-7xl md:text-8xl font-extrabold bg-gradient-to-r from-purple-500 via-blue-400 to-green-400 bg-clip-text text-transparent mb-8 drop-shadow-lg tracking-tight">CodeForgeAI</h1>
                 <p className="mt-4 text-2xl md:text-3xl text-gray-200 mb-10 font-medium">The Next Generation AI-Powered IDE</p>
@@ -75,8 +63,9 @@ export default function Home() {
                 </div>
               </motion.div>
             </section>
+
             {/* About Section */}
-            <section id="about" className="py-20">
+            <section id="about" className="section py-20">
               <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="max-w-4xl mx-auto">
                 <h2 className="text-5xl font-bold mb-10 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent text-center">About CodeForgeAI</h2>
                 <div className="space-y-8 text-xl text-gray-300 leading-relaxed text-center">
@@ -85,23 +74,53 @@ export default function Home() {
                 </div>
               </motion.div>
             </section>
+
             {/* Feature Showcase */}
-            <section id="showcase" className="py-20">
+            <section id="showcase" className="section py-20">
               <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="w-full max-w-6xl mx-auto">
                 <h2 className="text-5xl font-bold mb-14 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent text-center">Key Features</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                  {/* ...feature cards, CommandDisplay, etc... */}
                   <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md border border-purple-900/20 hover:border-purple-500/30 transition-all hover:-translate-y-1">
                     <h3 className="text-2xl font-bold mb-4 text-purple-400">Project Analysis</h3>
                     <p className="text-gray-300 mb-4">Analyze your project structure and get insights about your codebase with AI-powered tools.</p>
                     <CommandDisplay command="codeforgeai analyze" />
                   </div>
-                  {/* ...other feature cards... */}
+                  
+                  <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md border border-purple-900/20 hover:border-purple-500/30 transition-all hover:-translate-y-1">
+                    <h3 className="text-2xl font-bold mb-4 text-purple-400">AI Code Completion</h3>
+                    <p className="text-gray-300 mb-4">Get intelligent code suggestions and completions powered by advanced AI models.</p>
+                    <CommandDisplay command="codeforgeai suggestion" />
+                  </div>
+                  
+                  <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md border border-purple-900/20 hover:border-purple-500/30 transition-all hover:-translate-y-1">
+                    <h3 className="text-2xl font-bold mb-4 text-purple-400">Code Explanation</h3>
+                    <p className="text-gray-300 mb-4">Get detailed explanations of complex code to understand functionality and logic.</p>
+                    <CommandDisplay command="codeforgeai explain filename.py" />
+                  </div>
+                  
+                  <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md border border-purple-900/20 hover:border-purple-500/30 transition-all hover:-translate-y-1">
+                    <h3 className="text-2xl font-bold mb-4 text-purple-400">Smart Contract Analysis</h3>
+                    <p className="text-gray-300 mb-4">Analyze Web3 smart contracts for security vulnerabilities and optimization opportunities.</p>
+                    <CommandDisplay command="codeforgeai web3 analyze-contract" />
+                  </div>
+                  
+                  <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md border border-purple-900/20 hover:border-purple-500/30 transition-all hover:-translate-y-1">
+                    <h3 className="text-2xl font-bold mb-4 text-purple-400">Git Integration</h3>
+                    <p className="text-gray-300 mb-4">Generate meaningful commit messages with appropriate emojis based on your changes.</p>
+                    <CommandDisplay command="codeforgeai commit-message" />
+                  </div>
+                  
+                  <div className="p-6 bg-black/30 rounded-xl backdrop-blur-md border border-purple-900/20 hover:border-purple-500/30 transition-all hover:-translate-y-1">
+                    <h3 className="text-2xl font-bold mb-4 text-purple-400">Command Processing</h3>
+                    <p className="text-gray-300 mb-4">Generate terminal commands for complex tasks using natural language instructions.</p>
+                    <CommandDisplay command='codeforgeai command "setup project"' />
+                  </div>
                 </div>
               </motion.div>
             </section>
+
             {/* Contact Section */}
-            <section id="contact" className="py-20">
+            <section id="contact" className="section py-20">
               <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="max-w-xl w-full mx-auto">
                 <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent text-center">Get In Touch</h2>
                 <form className="space-y-6 bg-black/40 p-8 rounded-2xl border border-purple-900/30 shadow-xl">
@@ -117,8 +136,204 @@ export default function Home() {
                 </form>
               </motion.div>
             </section>
+
             {/* Documentation Sections */}
-            {/* ...installation, configuration, quickstart, etc... (preserved as before) ... */}
+            <section id="installation" className="section pt-20">
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                className="max-w-4xl w-full"
+              >
+                <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Installation</h2>
+                <div className="space-y-6">
+                  <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md border border-purple-900/20">
+                    <h3 className="text-xl font-semibold mb-4 text-purple-400">Prerequisites</h3>
+                    <ul className="list-disc list-inside space-y-2 text-gray-300">
+                      <li>Python 3.8 or higher</li>
+                      <li>Git</li>
+                      <li>Ollama (for local AI models)</li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md border border-purple-900/20">
+                    <h3 className="text-xl font-semibold mb-4 text-purple-400">Step-by-Step Installation</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <p className="text-gray-300 mb-2">1. Clone the repository:</p>
+                        <CommandDisplay 
+                          command="git clone https://github.com/codeforge-ide/codeforgeai.git && cd codeforgeai"
+                          description="Clone the repository and navigate to the project directory"
+                        />
+                      </div>
+                      <div>
+                        <p className="text-gray-300 mb-2">2. Install in development mode:</p>
+                        <CommandDisplay 
+                          command="pip install -e ."
+                          description="Install the package in development mode"
+                          output="Successfully installed codeforgeai-0.1.0"
+                        />
+                      </div>
+                      <div>
+                        <p className="text-gray-300 mb-2">3. Verify your installation:</p>
+                        <CommandDisplay 
+                          command="codeforgeai --help"
+                          description="Check if the installation was successful"
+                          output="Usage: codeforgeai [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  analyze          Analyze project structure
+  command          Generate terminal commands
+  commit-message   Generate commit messages
+  config           View or modify configuration
+  explain          Explain code in a file
+  prompt           Send a prompt to the AI
+  suggestion       Get code suggestions
+  web3             Web3 development commands"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </section>
+
+            <section id="configuration" className="section">
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                className="max-w-4xl w-full"
+              >
+                <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Configuration</h2>
+                <div className="space-y-6">
+                  <p className="text-lg text-gray-300">
+                    CodeForgeAI uses a configuration file stored at <code className="text-purple-400">~/.codeforgeai.json</code>. 
+                    The first time you run a command, this file will be created with default settings.
+                  </p>
+                  
+                  <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md border border-purple-900/20">
+                    <h3 className="text-xl font-semibold mb-4 text-purple-400">View Current Configuration</h3>
+                    <CommandDisplay 
+                      command="codeforgeai config"
+                      description="View your current configuration settings"
+                      output="{
+  \u0022general_model\u0022: \u0022tinyllama\u0022,
+  \u0022code_model\u0022: \u0022qwen2.5-coder:0.5b\u0022,
+  \u0022format_line_separator\u0022: 5
+}"
+                    />
+                  </div>
+                  
+                  <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md border border-purple-900/20">
+                    <h3 className="text-xl font-semibold mb-4 text-purple-400">Update Configuration</h3>
+                    <CommandDisplay 
+                      command="codeforgeai config --set code_model=qwen2.5-coder:2b"
+                      description="Update a specific configuration setting"
+                      output="Configuration updated successfully!"
+                    />
+                  </div>
+
+                  <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md border border-purple-900/20">
+                    <h3 className="text-xl font-semibold mb-4 text-purple-400">Key Configuration Options</h3>
+                    <ul className="space-y-3 text-gray-300">
+                      <li><strong className="text-purple-400">general_model</strong>: The AI model for general prompts (default: "tinyllama")</li>
+                      <li><strong className="text-purple-400">code_model</strong>: The AI model for code-specific tasks (default: "qwen2.5-coder:0.5b")</li>
+                      <li><strong className="text-purple-400">format_line_separator</strong>: Number of newlines between extracted code blocks (default: 5)</li>
+                    </ul>
+                  </div>
+                </div>
+              </motion.div>
+            </section>
+
+            <section id="quickstart" className="section">
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                className="max-w-4xl w-full"
+              >
+                <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Quick Start</h2>
+                <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md border border-purple-900/20">
+                  <h3 className="text-xl font-semibold mb-4 text-purple-400">Basic Commands</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-gray-300 mb-2">Analyze your project structure:</p>
+                      <CommandDisplay 
+                        command="codeforgeai analyze"
+                        description="Get an overview of your project codebase"
+                        output="Analyzing project structure...
+Found 42 files in 8 directories
+Main technologies: Python, JavaScript, HTML/CSS
+Project type: Web Application with API"
+                      />
+                    </div>
+                    <div>
+                      <p className="text-gray-300 mb-2">Get AI assistance for coding tasks:</p>
+                      <CommandDisplay 
+                        command='codeforgeai prompt "Create a function to calculate Fibonacci numbers"'
+                        description="Ask the AI for code solutions"
+                        output="def fibonacci(n):
+    \u0022\u0022\u0022
+    Calculate the nth number in the Fibonacci sequence.
+    
+    Args:
+        n: A positive integer
+        
+    Returns:
+        The nth Fibonacci number
+    \u0022\u0022\u0022
+    if n <= 0:
+        raise ValueError(\u0022Input must be a positive integer\u0022)
+    elif n == 1:
+        return 0
+    elif n == 2:
+        return 1
+    
+    # Initialize the first two Fibonacci numbers
+    a, b = 0, 1
+    
+    # Calculate the nth Fibonacci number
+    for _ in range(3, n+1):
+        a, b = b, a + b
+        
+    return b"
+                      />
+                    </div>
+                    <div>
+                      <p className="text-gray-300 mb-2">Get explanations for code in a file:</p>
+                      <CommandDisplay 
+                        command="codeforgeai explain path/to/file.py"
+                        description="Get a detailed explanation of code functionality"
+                        output="# Code Explanation for file.py
+
+This file contains a Flask web application that serves as a REST API. Here's a breakdown:
+
+1. Imports and setup:
+   - Flask framework and related modules
+   - Database connection utilities
+   - Authentication helpers
+
+2. Routes:
+   - GET /api/users - Returns a list of users (requires authentication)
+   - POST /api/login - Handles user authentication and returns JWT tokens
+   - PUT /api/users/:id - Updates user information
+
+3. Key functionality:
+   - JWT-based authentication
+   - Database connection pooling
+   - Request rate limiting"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </section>
+            
+            {/* Add more documentation sections for completeness */}
+            {/* Each section follows the same pattern with styled headings, code blocks and explanatory text */}
+            {/* ... */}
+            
             {/* Footer */}
             <footer className="py-16 mt-auto border-t border-purple-900/30 text-center bg-black/30">
               <div className="max-w-4xl mx-auto">
@@ -135,9 +350,9 @@ export default function Home() {
                 <div className="text-gray-500 text-sm">&copy; {new Date().getFullYear()} CodeForgeAI. All rights reserved.</div>
               </div>
             </footer>
-          </main>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
