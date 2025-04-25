@@ -1,15 +1,17 @@
 "use client";
 import React, { useState, useRef } from 'react';
 import Sidebar from '@/components/Sidebar';
-import { motion } from 'framer-motion'; // Import motion
-// ...import any other animation libraries or components as needed...
+import { motion } from 'framer-motion';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'; // Import icons
 import CommandDisplay  from '@/components/CommandDisplay';
 
 export default function Home() {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
   const sidebarRef = useRef<HTMLDivElement>(null);
 
-  const toggleSidebar = () => setIsSidebarExpanded((prev) => !prev);
+  const toggleSidebar = () => setIsSidebarExpanded((prev: boolean) => !prev);
+  const toggleMobileMenu = () => setIsMobileMenuOpen((prev: boolean) => !prev); // Toggle mobile menu
 
   return (
     <div className="min-h-screen flex bg-gradient-to-br from-[#0a0a0a] via-[#18122B] to-[#2D3250]">
@@ -19,31 +21,72 @@ export default function Home() {
         isExpanded={isSidebarExpanded}
         toggleSidebar={toggleSidebar}
       />
-      {/* Main Content - Removed explicit pl-* classes */}
+      {/* Main Content - Use ml-* for spacing */}
       <main
-        className={`flex-1 min-h-screen transition-all duration-300 ease-in-out flex flex-col`}
+        className={`flex-1 min-h-screen transition-all duration-300 ease-in-out flex flex-col ${isSidebarExpanded ? 'ml-64' : 'ml-20'}`}
       >
         {/* Navbar */}
-        <nav className="sticky top-0 z-30 w-full bg-black/80 backdrop-blur-xl border-b border-purple-900/30 shadow-lg rounded-t-2xl">
-          <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <ul className="flex items-center gap-6">
-              <li><a href="#home" className="px-5 py-2 rounded-md text-white font-semibold hover:bg-purple-900/20 hover:text-purple-400 transition">Home</a></li>
-              <li><a href="#about" className="px-5 py-2 rounded-md text-white font-semibold hover:bg-purple-900/20 hover:text-purple-400 transition">About</a></li>
-              <li><a href="#showcase" className="px-5 py-2 rounded-md text-white font-semibold hover:bg-purple-900/20 hover:text-purple-400 transition">Features</a></li>
-              <li><a href="#contact" className="px-5 py-2 rounded-md text-white font-semibold hover:bg-purple-900/20 hover:text-purple-400 transition">Contact</a></li>
-            </ul>
-            <a href="https://github.com/codeforge-ide/codeforgeai" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-green-400/80 rounded-lg hover:from-purple-500 hover:to-green-300 transition-colors shadow-md border border-purple-700/30 font-semibold">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
-              </svg>
-              GitHub
-            </a>
+        <nav className="sticky top-0 z-30 w-full bg-black/80 backdrop-blur-xl border-b border-purple-900/30 shadow-lg">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center h-16">
+              {/* Logo/Brand (Optional) */}
+              <div className="flex-shrink-0">
+                {/* <img className="h-8 w-auto" src="/logo.png" alt="CodeForgeAI" /> */}
+                <span className="text-xl font-bold text-white">CodeForgeAI</span>
+              </div>
+
+              {/* Desktop Navigation Links */}
+              <div className="hidden md:flex md:items-center md:space-x-4">
+                <a href="#home" className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition">Home</a>
+                <a href="#about" className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition">About</a>
+                <a href="#showcase" className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition">Features</a>
+                <a href="#contact" className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition">Contact</a>
+                <a href="https://github.com/codeforge-ide/codeforgeai" target="_blank" rel="noopener noreferrer" className="ml-4 flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-green-400/80 rounded-md text-sm font-medium text-white hover:from-purple-500 hover:to-green-300 transition-colors shadow-sm border border-purple-700/30">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.036 1.531 1.036.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.82c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.379.201 2.397.098 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+                  </svg>
+                  GitHub
+                </a>
+              </div>
+
+              {/* Mobile Menu Button */}
+              <div className="-mr-2 flex md:hidden">
+                <button
+                  onClick={toggleMobileMenu}
+                  type="button"
+                  className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                  aria-controls="mobile-menu"
+                  aria-expanded={isMobileMenuOpen}
+                >
+                  <span className="sr-only">Open main menu</span>
+                  {isMobileMenuOpen ? (
+                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                  ) : (
+                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Menu, show/hide based on menu state. */}
+          <div className={`${isMobileMenuOpen ? 'block' : 'hidden'} md:hidden`} id="mobile-menu">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-purple-900/30">
+              <a href="#home" className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition">Home</a>
+              <a href="#about" className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition">About</a>
+              <a href="#showcase" className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition">Features</a>
+              <a href="#contact" className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition">Contact</a>
+              <a href="https://github.com/codeforge-ide/codeforgeai" target="_blank" rel="noopener noreferrer" className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition">
+                GitHub
+              </a>
+            </div>
           </div>
         </nav>
+
         {/* Main Content Sections */}
         <div className="flex-1 w-full max-w-7xl mx-auto px-4 md:px-8 py-8">
           {/* Hero Section */}
-          <section id="home" className="flex flex-col items-center justify-center min-h-[80vh] text-center relative">
+          <section id="home" className="flex flex-col items-center justify-center min-h-[calc(80vh-4rem)] text-center relative pt-16">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl mx-auto">
               <h1 className="text-7xl md:text-8xl font-extrabold bg-gradient-to-r from-purple-500 via-blue-400 to-green-400 bg-clip-text text-transparent mb-8 drop-shadow-lg tracking-tight">CodeForgeAI</h1>
               <p className="mt-4 text-2xl md:text-3xl text-gray-200 mb-10 font-medium">The Next Generation AI-Powered IDE</p>
@@ -321,7 +364,7 @@ This file contains a Flask web application that serves as a REST API. Here's a b
           {/* ... */}
           
           {/* Footer */}
-          <footer className="py-12 border-t border-purple-900/30 text-center bg-gradient-to-r from-black/40 via-purple-900/10 to-black/40 rounded-b-2xl shadow-inner mt-8">
+          <footer className="py-12 border-t border-purple-900/30 text-center bg-gradient-to-r from-black/40 via-purple-900/10 to-black/40 rounded-b-2xl shadow-inner mt-8"></footer>
             <div className="max-w-4xl mx-auto">
               <div className="mb-8">
                 <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-400 to-green-400 bg-clip-text text-transparent">CodeForgeAI</h2>
