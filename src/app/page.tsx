@@ -1,47 +1,42 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  FeatureCard, 
-  GlassCard, 
-  RevealText, 
-  TextGradient,
-  CodeHighlight
-} from '@/components/cards';
+// Unused card components removed
 import CommandDisplay from '@/components/CommandDisplay';
 import Sidebar from '@/components/Sidebar';
 
 export default function Home() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  // Unused mousePosition state and effect removed
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(true); // State for sidebar
   const sidebarRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  const toggleSidebar = () => {
+    setIsSidebarExpanded(!isSidebarExpanded);
+  };
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-br from-[#0a0a0a] via-[#18122B] to-[#2D3250]">
-        {/* Sidebar component */}
-        <Sidebar ref={sidebarRef} />
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0a0a] via-[#18122B] to-[#2D3250] flex"> {/* Use flex layout */}
+        {/* Sidebar component - Pass state and toggle function */}
+        <Sidebar 
+          ref={sidebarRef} 
+          isExpanded={isSidebarExpanded} 
+          toggleSidebar={toggleSidebar} 
+        />
         
-        {/* Main content - with lg:ml-64 to offset it by the sidebar width on large screens */}
-        <div className="min-h-screen lg:ml-64">
+        {/* Main content container */}
+        <div className={`flex-1 transition-all duration-300 ease-in-out ${isSidebarExpanded ? 'lg:pl-64' : 'lg:pl-20'} bg-black/30 rounded-2xl shadow-2xl border border-purple-900/30 mt-4 mb-4 mr-4 overflow-hidden`}> {/* Enhanced aesthetics */}
           {/* Top nav */}
-          <nav className="sticky top-0 bg-black/60 backdrop-blur-lg z-30 border-b border-purple-900/30 shadow-md">
+          <nav className="sticky top-0 bg-black/70 backdrop-blur-xl z-30 border-b border-purple-900/30 shadow-lg rounded-t-2xl">
             <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
               <ul className="flex items-center gap-8">
-                <li><a href="#home" className="text-white hover:text-purple-400 font-semibold transition-colors">Home</a></li>
-                <li><a href="#about" className="text-white hover:text-purple-400 font-semibold transition-colors">About</a></li>
-                <li><a href="#showcase" className="text-white hover:text-purple-400 font-semibold transition-colors">Features</a></li>
-                <li><a href="#contact" className="text-white hover:text-purple-400 font-semibold transition-colors">Contact</a></li>
+                <li><a href="#home" className="text-white hover:text-purple-400 font-semibold transition-colors duration-200 px-3 py-1 rounded-md hover:bg-purple-900/20">Home</a></li>
+                <li><a href="#about" className="text-white hover:text-purple-400 font-semibold transition-colors duration-200 px-3 py-1 rounded-md hover:bg-purple-900/20">About</a></li>
+                <li><a href="#showcase" className="text-white hover:text-purple-400 font-semibold transition-colors duration-200 px-3 py-1 rounded-md hover:bg-purple-900/20">Features</a></li>
+                <li><a href="#contact" className="text-white hover:text-purple-400 font-semibold transition-colors duration-200 px-3 py-1 rounded-md hover:bg-purple-900/20">Contact</a></li>
               </ul>
-              <a href="https://github.com/codeforge-ide/codeforgeai" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-green-400/80 rounded-lg hover:from-purple-500 hover:to-green-300 transition-colors shadow-md">
+              <a href="https://github.com/codeforge-ide/codeforgeai" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-green-400/80 rounded-lg hover:from-purple-500 hover:to-green-300 transition-colors shadow-md border border-purple-700/30">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
                 </svg>
@@ -58,8 +53,8 @@ export default function Home() {
                 <h1 className="text-7xl md:text-8xl font-extrabold bg-gradient-to-r from-purple-500 via-blue-400 to-green-400 bg-clip-text text-transparent mb-8 drop-shadow-lg tracking-tight">CodeForgeAI</h1>
                 <p className="mt-4 text-2xl md:text-3xl text-gray-200 mb-10 font-medium">The Next Generation AI-Powered IDE</p>
                 <div className="flex flex-wrap justify-center gap-6">
-                  <a href="#installation" className="px-10 py-4 bg-gradient-to-r from-purple-600 to-green-400 text-white font-bold rounded-xl shadow-lg hover:from-purple-500 hover:to-green-300 transition-all text-lg">Get Started</a>
-                  <a href="#showcase" className="px-10 py-4 bg-black/40 border border-purple-500/40 text-white font-bold rounded-xl shadow-lg hover:bg-black/60 transition-all text-lg">Features</a>
+                  <a href="#installation" className="px-14 py-6 bg-gradient-to-r from-purple-600 to-green-400 text-white font-bold rounded-xl shadow-lg hover:from-purple-500 hover:to-green-300 transition-all text-lg">Get Started</a>
+                  <a href="#showcase" className="px-14 py-6 bg-black/40 border border-purple-500/40 text-white font-bold rounded-xl shadow-lg hover:bg-black/60 transition-all text-lg">Features</a>
                 </div>
               </motion.div>
             </section>
@@ -132,7 +127,7 @@ export default function Home() {
                     <label htmlFor="message" className="block text-base font-medium text-gray-400">Message</label>
                     <textarea id="message" placeholder="Your message" className="w-full p-4 bg-black/30 border border-purple-900/30 rounded-lg backdrop-blur-md focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none" rows={5} />
                   </div>
-                  <button className="px-10 py-3 bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-500 hover:to-purple-700 rounded-lg transition-colors w-full md:w-auto text-lg font-bold text-white shadow-lg">Send Message</button>
+                  <button className="px-14 py-5 bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-500 hover:to-purple-700 rounded-lg transition-colors w-full md:w-auto text-lg font-bold text-white shadow-lg">Send Message</button>
                 </form>
               </motion.div>
             </section>
@@ -335,7 +330,7 @@ This file contains a Flask web application that serves as a REST API. Here's a b
             {/* ... */}
             
             {/* Footer */}
-            <footer className="py-16 mt-auto border-t border-purple-900/30 text-center bg-black/30">
+            <footer className="py-16 mt-auto border-t border-purple-900/30 text-center bg-gradient-to-r from-black/40 via-purple-900/10 to-black/40 rounded-b-2xl shadow-inner">
               <div className="max-w-4xl mx-auto">
                 <div className="mb-8">
                   <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-400 to-green-400 bg-clip-text text-transparent">CodeForgeAI</h2>
@@ -347,7 +342,7 @@ This file contains a Flask web application that serves as a REST API. Here's a b
                   <a href="#showcase" className="text-gray-400 hover:text-purple-400 font-semibold">Features</a>
                   <a href="#contact" className="text-gray-400 hover:text-purple-400 font-semibold">Contact</a>
                 </div>
-                <div className="text-gray-500 text-sm">&copy; {new Date().getFullYear()} CodeForgeAI. All rights reserved.</div>
+                <div className="text-gray-500 text-sm">&copy;  CodeForgeAI. All rights reserved.</div>
               </div>
             </footer>
           </div>
