@@ -1,6 +1,9 @@
+"use client";
 import React, { useState, useRef } from 'react';
 import Sidebar from '@/components/Sidebar';
-// ...import any animation libraries or components as needed...
+import { motion } from 'framer-motion'; // Import motion
+// ...import any other animation libraries or components as needed...
+import CommandDisplay  from '@/components/CommandDisplay';
 
 export default function Home() {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
@@ -16,9 +19,9 @@ export default function Home() {
         isExpanded={isSidebarExpanded}
         toggleSidebar={toggleSidebar}
       />
-      {/* Main Content */}
+      {/* Main Content - Removed explicit pl-* classes */}
       <main
-        className={`flex-1 min-h-screen transition-all duration-300 ease-in-out ${isSidebarExpanded ? 'lg:pl-64' : 'lg:pl-20'} pl-0 flex flex-col`}
+        className={`flex-1 min-h-screen transition-all duration-300 ease-in-out flex flex-col`}
       >
         {/* Navbar */}
         <nav className="sticky top-0 z-30 w-full bg-black/80 backdrop-blur-xl border-b border-purple-900/30 shadow-lg rounded-t-2xl">
