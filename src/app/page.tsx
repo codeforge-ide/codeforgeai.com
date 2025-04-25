@@ -26,7 +26,7 @@ export default function Home() {
         />
         
         {/* Main content container */}
-        <div className={`flex-1 transition-all duration-300 ease-in-out ${isSidebarExpanded ? 'lg:pl-64' : 'lg:pl-20'} bg-black/30 rounded-2xl shadow-2xl border border-purple-900/30 mt-4 mb-4 mr-4 overflow-hidden`}> {/* Enhanced aesthetics */}
+        <div className={`flex-1 transition-all duration-300 ease-in-out ${isSidebarExpanded ? 'lg:pl-64' : 'lg:pl-20'} pl-0`}> {/* Always pad left for sidebar */}
           {/* Top nav */}
           <nav className="sticky top-0 bg-black/70 backdrop-blur-xl z-30 border-b border-purple-900/30 shadow-lg rounded-t-2xl">
             <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
