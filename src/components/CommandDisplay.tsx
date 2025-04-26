@@ -10,7 +10,7 @@ interface CommandDisplayProps {
 const CommandDisplay: React.FC<CommandDisplayProps> = ({ command, description, output }) => {
   return (
     <motion.div
-      className="command-display my-6 overflow-hidden rounded-xl border border-purple-500/40 bg-black/50 backdrop-blur-lg shadow-lg"
+      className="command-display my-6 overflow-hidden rounded-xl border border-gray-700 bg-gray-900 p-3 text-sm text-gray-200 font-mono relative group"
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}

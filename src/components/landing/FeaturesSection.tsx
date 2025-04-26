@@ -43,18 +43,18 @@ const features = [
 
 const FeaturesSection: React.FC<FeaturesSectionProps> = ({ CommandDisplay }) => {
   return (
-    <section id="showcase" className="py-20">
+    <section id="showcase" className="py-20 px-4"> {/* Added padding */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.8 }}
-        className="w-full max-w-6xl mx-auto"
+        className="max-w-6xl mx-auto" // Use max-width for centering container
       >
-        <h2 className="text-5xl font-bold mb-14 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent text-center">
+        <h2 className="text-4xl md:text-5xl font-bold mb-14 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent text-center"> {/* Adjusted size, gradient */}
           Key Features
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"> {/* Adjusted gap */}
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -62,17 +62,8 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({ CommandDisplay }) => 
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="p-6 bg-black/30 rounded-xl backdrop-blur-md border border-purple-900/20 hover:border-purple-500/30 transition-all hover:-translate-y-1 flex flex-col"
+              // Refined Card Styles
+              className="p-6 bg-gray-800/50 rounded-lg shadow-lg border border-gray-700/60 hover:border-purple-500/70 transition-all hover:shadow-purple-500/10 flex flex-col"
             >
-              <h3 className="text-2xl font-bold mb-4 text-purple-400">{feature.title}</h3>
-              <p className="text-gray-300 mb-4 flex-grow">{feature.description}</p>
-              {CommandDisplay && <CommandDisplay command={feature.command} />}
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
-    </section>
-  );
-};
-
-export default FeaturesSection;
+              <h3 className="text-xl font-semibold mb-3 text-purple-300">{feature.title}</h3> {/* Adjusted size, color */}
+              <p className="text-gray-300 mb-4 flex-grow text-base">{feature.description}</p> {/*

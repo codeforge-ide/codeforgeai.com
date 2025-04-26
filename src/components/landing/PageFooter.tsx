@@ -3,22 +3,24 @@ import React from 'react';
 const PageFooter = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className="py-12 border-t border-purple-900/30 text-center bg-gradient-to-r from-black/40 via-purple-900/10 to-black/40 shadow-inner mt-auto">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-400 to-green-400 bg-clip-text text-transparent">
+    // Adjusted Footer Style
+    <footer className="py-10 border-t border-gray-700/50 text-center bg-gray-900 mt-auto px-4"> {/* Simplified background, adjusted padding */}
+      <div className="max-w-4xl mx-auto"> {/* Centering container */}
+        <div className="mb-6"> {/* Adjusted margin */}
+          <h2 className="text-2xl font-bold mb-1 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent"> {/* Adjusted size, gradient */}
             CodeForgeAI
           </h2>
-          <p className="text-gray-400">The Next Generation AI-Powered IDE</p>
+          <p className="text-gray-400 text-sm">The Next Generation AI-Powered IDE Integration</p> {/* Adjusted size */}
         </div>
-        <div className="flex justify-center flex-wrap gap-x-10 gap-y-4 mb-8">
-          <a href="#home" className="text-gray-400 hover:text-purple-400 font-semibold transition">Home</a>
-          <a href="#about" className="text-gray-400 hover:text-purple-400 font-semibold transition">About</a>
-          <a href="#showcase" className="text-gray-400 hover:text-purple-400 font-semibold transition">Features</a>
-          <a href="#contact" className="text-gray-400 hover:text-purple-400 font-semibold transition">Contact</a>
-          <a href="https://github.com/codeforge-ide/codeforgeai" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-purple-400 font-semibold transition">GitHub</a>
+        <div className="flex justify-center flex-wrap gap-x-6 gap-y-3 mb-6"> {/* Adjusted gap, margin */}
+          {/* Adjusted Link Styles */}
+          <a href="#home" className="text-gray-400 hover:text-purple-300 text-sm font-medium transition-colors">Home</a>
+          <a href="#about" className="text-gray-400 hover:text-purple-300 text-sm font-medium transition-colors">About</a>
+          <a href="#showcase" className="text-gray-400 hover:text-purple-300 text-sm font-medium transition-colors">Features</a>
+          <a href="#contact" className="text-gray-400 hover:text-purple-300 text-sm font-medium transition-colors">Contact</a>
+          <a href="https://github.com/codeforge-ide/codeforgeai" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-purple-300 text-sm font-medium transition-colors">GitHub</a>
         </div>
-        <div className="text-gray-500 text-sm">
+        <div className="text-gray-500 text-xs"> {/* Adjusted size */}
           &copy; {currentYear} CodeForgeAI. All rights reserved.
         </div>
       </div>

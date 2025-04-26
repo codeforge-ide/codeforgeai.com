@@ -12,7 +12,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const toggleSidebar = () => setIsSidebarExpanded((prev: boolean) => !prev);
 
   return (
-    <div className="min-h-screen flex bg-gradient-to-br from-[#0a0a0a] via-[#18122B] to-[#2D3250]">
+    <div className="min-h-screen flex bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-100"> {/* Updated background & text color */}
       {/* Sidebar */}
       <Sidebar
         ref={sidebarRef}

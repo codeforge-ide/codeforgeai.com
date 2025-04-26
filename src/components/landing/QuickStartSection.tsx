@@ -10,20 +10,20 @@ interface QuickStartSectionProps {
 
 const QuickStartSection: React.FC<QuickStartSectionProps> = ({ CommandDisplay }) => {
   return (
-    <section id="quickstart" className="py-20">
+    <section id="quickstart" className="py-20 px-4"> {/* Added padding */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.8 }}
-        className="max-w-4xl mx-auto"
+        className="max-w-4xl mx-auto" // Centering container
       >
-        <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
+        <h2 className="text-3xl md:text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent"> {/* Adjusted size, gradient */}
           Quick Start
         </h2>
-        <div className="bg-black/30 p-6 rounded-xl backdrop-blur-md border border-purple-900/20">
-          <h3 className="text-xl font-semibold mb-4 text-purple-400">Basic Commands</h3>
-          <div className="space-y-4">
+        <div className="bg-gray-800/50 p-6 rounded-lg shadow-md border border-gray-700/60"> {/* Card style */}
+          <h3 className="text-xl font-semibold mb-5 text-purple-300">Basic Commands</h3> {/* Adjusted margin */}
+          <div className="space-y-5"> {/* Adjusted spacing */}
             <div>
               <p className="text-gray-300 mb-2">Analyze your project structure:</p>
               {CommandDisplay && <CommandDisplay command="codeforgeai analyze" />}
@@ -45,7 +45,9 @@ const QuickStartSection: React.FC<QuickStartSectionProps> = ({ CommandDisplay })
               {CommandDisplay && <CommandDisplay command='codeforgeai command "list all files larger than 1MB"' />}
             </div>
           </div>
-           <p className="text-sm text-gray-400 mt-4">Use <code className="text-purple-400">codeforgeai --help</code> to see all available commands and options.</p>
+           <p className="text-sm text-gray-400 mt-5"> {/* Adjusted margin */}
+             Use <code className="text-purple-300 bg-gray-700 px-1.5 py-0.5 rounded text-sm">codeforgeai --help</code> to see all available commands. {/* Adjusted code style */}
+           </p>
         </div>
       </motion.div>
     </section>
