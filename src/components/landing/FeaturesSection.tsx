@@ -65,5 +65,15 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({ CommandDisplay }) => 
               // Refined Card Styles
               className="p-6 bg-gray-800/50 rounded-lg shadow-lg border border-gray-700/60 hover:border-purple-500/70 transition-all hover:shadow-purple-500/10 flex flex-col"
             >
-              <h3 className="text-xl font-semibold mb-3 text-purple-300">{feature.title}</h3> {/* Adjusted size, color */}
-              <p className="text-gray-300 mb-4 flex-grow text-base">{feature.description}</p> {/*
+               <h3 className="text-xl font-semibold mb-3 text-purple-300">{feature.title}</h3>
+               <p className="text-gray-300 mb-4 flex-grow text-base">{feature.description}</p>
+               <CommandDisplay command={feature.command} />
+             </motion.div>
+           ))}
+         </div>
+       </motion.div>
+     </section>
+   );
+ };
+
+ export default FeaturesSection;
