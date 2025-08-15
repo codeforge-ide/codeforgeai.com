@@ -36,8 +36,8 @@ export default function ProblemSlide({ isActive }: SlideProps) {
         </div>
         <div className="mt-16 p-8 bg-gradient-to-r from-red-900/20 to-orange-900/20 rounded-2xl border border-red-500/20">
           <p className="text-xl text-gray-400 italic">
-            "Development teams need a unified, intelligent CLI that brings AI assistance 
-            directly into their existing workflows."
+            &ldquo;Development teams need a unified, intelligent CLI that brings AI assistance 
+            directly into their existing workflows.&rdquo;
           </p>
         </div>
       </div>

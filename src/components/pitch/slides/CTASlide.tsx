@@ -57,7 +57,7 @@ export default function CTASlide({ isActive }: SlideProps) {
           </div>
           
           <p className="text-xl text-gray-400 italic">
-            "The future of development is here. Make it yours."
+            &ldquo;The future of development is here. Make it yours.&rdquo;
           </p>
         </div>
       </div>

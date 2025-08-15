@@ -38,7 +38,7 @@ const ConfigurationSection: React.FC<ConfigurationSectionProps> = ({ CommandDisp
             <p className="text-gray-300 mb-2">Example: Set the general AI model:</p>
             {CommandDisplay && <CommandDisplay command='codeforgeai config set general_model "ollama/mistral"' />}
              <p className="text-sm text-gray-400 mt-2"> {/* Adjusted margin */}
-               Replace <code className="text-purple-300 bg-gray-700 px-1 rounded text-xs">general_model</code> with the key and <code className="text-purple-300 bg-gray-700 px-1 rounded text-xs">"ollama/mistral"</code> with the value. {/* Adjusted code style */}
+                               Replace <code className="text-purple-300 bg-gray-700 px-1 rounded text-xs">general_model</code> with the key and <code className="text-purple-300 bg-gray-700 px-1 rounded text-xs">&quot;ollama/mistral&quot;</code> with the value. {/* Adjusted code style */}
              </p>
           </div>
 
@@ -46,9 +46,8 @@ const ConfigurationSection: React.FC<ConfigurationSectionProps> = ({ CommandDisp
           <div className="bg-gray-800/50 p-6 rounded-lg shadow-md border border-gray-700/60">
             <h3 className="text-xl font-semibold mb-4 text-purple-300">Key Configuration Options</h3>
             <ul className="space-y-3 text-gray-300">
-              <li><strong className="text-purple-300 font-medium">general_model</strong>: Model for general prompts (e.g., <code className="text-gray-400 text-xs">"ollama/tinyllama"</code>). Default: <code className="text-gray-400 text-xs">"ollama/tinyllama"</code></li> {/* Adjusted styles */}
-              <li><strong className="text-purple-300 font-medium">code_model</strong>: Model for code tasks (e.g., <code className="text-gray-400 text-xs">"ollama/codellama"</code>). Default: <code className="text-gray-400 text-xs">"ollama/codellama"</code></li> {/* Adjusted styles */}
-              <li><strong className="text-purple-300 font-medium">openai_api_key</strong>: Your OpenAI API key (if using OpenAI models).</li>
+               <li><strong className="text-purple-300 font-medium">general_model</strong>: Model for general prompts (e.g., <code className="text-gray-400 text-xs">&quot;ollama/tinyllama&quot;</code>). Default: <code className="text-gray-400 text-xs">&quot;ollama/tinyllama&quot;</code></li>
+               <li><strong className="text-purple-300 font-medium">code_model</strong>: Model for code tasks (e.g., <code className="text-gray-400 text-xs">&quot;ollama/codellama&quot;</code>). Default: <code className="text-gray-400 text-xs">&quot;ollama/codellama&quot;</code></li>              <li><strong className="text-purple-300 font-medium">openai_api_key</strong>: Your OpenAI API key (if using OpenAI models).</li>
               <li><strong className="text-purple-300 font-medium">ollama_base_url</strong>: The base URL for your Ollama instance (if not default <code className="text-gray-400 text-xs">http://localhost:11434</code>).</li>
               {/* Add other relevant config options here */}
             </ul>
